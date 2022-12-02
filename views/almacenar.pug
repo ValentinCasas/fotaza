@@ -1,0 +1,81 @@
+doctype html
+html
+    head
+        title= title
+
+        link(rel='stylesheet' href='/almacenar.css')
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css")
+        script(type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js")
+        script(nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js")
+
+        script(src="//cdn.jsdelivr.net/npm/sweetalert2@11")
+        script(src="/almacenar.js" defer) 
+
+    body
+
+        nav( id="nav-bar")
+            div( class="col-lg-10 col-md-10 col-sm-10 col-xs-10")
+                h1( id="fotaza") Fotaza
+            div(id="contain-profile-icon" class="col-lg-2 col-md-2 col-sm-2 col-xs-2")
+                a(href="/user/profile")
+                    ion-icon(name="person-circle-sharp" id="profile-icon")          
+
+        div( id="almacenar" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-5  p-4")
+
+            form( action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data' class="row justify-content-center col-lg-8 col-md-8 col-sm-8 col-xs-12")
+
+                div( class="data-photo-box my-5")
+                    input( type="text" name="title" required="")
+                    label Titulo
+
+
+                label(  class=" col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") Privacidad
+                select( name="privacy" id="privacy" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control  p-2")
+                    option( value="protected") PROTEGIDA
+                    option( value="public") PUBLICA
+
+
+                label( class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") Categoria
+                select( name="category" id="category" class=" col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control p-2")
+                    option( value="publicitaria") Publicitaria
+                    option( value="artistica") Artistica
+                    option( value="periodistico") Periodistico
+                    option( value="paisajes") Paisajes
+                    option( value="retrato") Retrato
+                    option( value="area") Area
+                    option( value="accion") Accion
+                    option( value="movimiento") Movimiento
+
+                div( class="data-photo-box my-5 ")
+                    input( type="text" name="label1" required="")
+                    label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") etiqueta 1
+                div( class="data-photo-box my-5 mx-2")
+                    input( type="text" name="label2" required="")
+                    label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") etiqueta 2
+                div( class="data-photo-box my-5")
+                    input( type="text" name="label3" required="")
+                    label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") etiqueta 3
+
+
+                label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2 ") Derechos de uso
+                select(name="rightOfUse" id="category" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control  p-2")
+                    option(value="Copyright") Copyright
+                    option(value="Copyleft") Copyleft
+                    option(value="Public Domain") Public Domain
+                    option(value="Creative Commons") Creative Commons
+
+                label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 p-2 ") Imagen
+                input(type="file" name="imagen" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control btn-primary p-1"
+                    accept="image/jpeg,image/jpg,image/png" required="")
+
+
+                button(id="submitPhoto" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-4 p-4") Subir
+
+            div(id="almacenar-img" class="row justify-content-center col-lg-4 col-md-4 col-sm-4 col-xs-12 p-0")
+                img(src="/naveEspacial.jpg")
+
+
+

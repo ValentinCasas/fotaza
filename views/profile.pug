@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+
+        title Document
+        link(rel="stylesheet" href="/profile.css")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css")
+
+        script(type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js")
+        script(nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js")
+    body 
+
+
+        a(id="cerrar-comments" href="/photo")
+            ion-icon(name="close" id="icon-cerrar-comment")
+
+
+        div(id="img-profile" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4") 
+            img(src=`/${users[0].profileImage}`)
+
+        div(class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 ")     
+            p  #{users[0].name+" "+users[0].surname}
+        div(class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12")     
+            p intereses: #{users[0].interests}    
+
+        div(id="contain-cards" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-5 p-4")
+            each photo in photos 
+                div(id="card-img" class="row justify-content-center col-lg-3 col-md-10 col-sm-10 col-xs-10 my-2 mx-5") 
+                    i=photo.category    
+                    img(src=`/${photo.image}`)
+
+                    i=photo.creationDate 
+
+                    div(id="delete-photo" class="col-lg-10 col-md-10 col-sm-10 col-xs-10 ")  
+                    a(id="abrirComments" href=`/comment/view/${photo.id}`)  comentarios
+
+                    div(id="delete-photo" class=" col-lg-10 col-md-10 col-sm-10 col-xs-10 ")                   
+                        details 
+                            summary 
+                             ion-icon(id="details" name="chevron-down-sharp")
+                            a(href=`/photo/delete/${photo.id}`)
+                                ion-icon(id="delete" name="trash")

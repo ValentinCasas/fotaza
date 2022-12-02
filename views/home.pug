@@ -1,0 +1,162 @@
+doctype html
+html
+    head
+        title= title
+
+        link(rel='stylesheet' href='/home.css')
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css")
+
+        script(type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js")
+        script(nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js")
+
+        script(content-type="JavaScript" src="/messages-section.js" defer) 
+        script(content-type="JavaScript" src="/home.js" defer) 
+    body
+
+        nav( id="nav-bar")
+            div( class="col-lg-10 col-md-10 col-sm-10 col-xs-10")
+                h1( id="fotaza") Fotaza
+            div(id="contain-profile-icon" class="col-lg-2 col-md-2 col-sm-2 col-xs-2")
+                a(href="/user/profile")
+                    ion-icon(name="person-circle-sharp" id="profile-icon")                
+
+        div(id="top-photos")
+            each photo in photos
+                div(id="top-img")
+                    a(href=`/photo/target-top/${photo.id}` id="top-target")
+                        img(src=`/${photo.image}`)
+
+
+        a(id="cerrar" onclick="cerrar()" )
+            ion-icon(name="close" id="close")
+
+        div(id="contain-menu")
+            div(id="cuadro-menu")
+                a(href="/photo/sort/fecha")
+                    button(id="contact-btn") fecha de creacion  
+            div(id="cuadro-menu")
+                a(href="/photo/sort/public")
+                    button(id="contact-btn") publicas
+            div(id="cuadro-menu")
+                a(href="/photo/sort/protected")
+                    button(id="contact-btn") protegidas      
+            div(id="cuadro-menu")
+                a(href="/photo/sort/private")
+                    button(id="contact-btn") privadas             
+
+
+        div(id="contain-menu-share" )
+            form( action="/message/share" method="post" id="cuadro-menu")
+                input(type="hidden" name="idPhoto" id="papa" value="")   
+                label Mensaje 
+                input(type="text" name="msg" class="form-control") 
+                label Destino
+                select(class="form-control" name="idReceptor")
+                    each user in users
+                        option(value=`${user.id}`) #{user.name}
+                button(id="contact-btn") compartir  
+
+
+        div(id="box-padre" class="row justify-content-center mx-2 my-5 px-3 col-lg-12 col-md-12 col-sm-12 col-xs-12")
+
+            div( class=" row col-lg-3 col-md-12 col-sm-12 col-xs-12 my-4 mx-4 p-4")
+                div( id="buttons-card" class="justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4")        
+
+                    div(class="row")
+                        button(id="btn")
+                            a(id="button_top" href="/photo/view/almacenar" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Almacenar
+                    div(class="row")
+                        button(id="btn")
+                            a(id="button_top" onclick="abrirMenu()" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Ordenar
+                    div(class="row")
+                        button(id="btn")
+                            a(id="button_top" href="/photo/view/almacenar" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Vender    
+                    div(class="row")
+                        button(id="btn")
+                            a(id="button_top" href="/message/view/myMessages" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Mis mensajes            
+
+
+            div( id="box-cards" class="border border-dark  col-lg-8 col-md-12 col-sm-12 col-xs-12 my-2 p-4 ")
+
+                div( id="box-buscar" class="row justify-content-center col-lg-10 col-md-10 col-sm-10 col-xs-10 ")
+                    div( class="row justify-content-center  col-lg-12 col-md-12 col-sm-12 col-xs-12")
+                        input( id="buscar" name="buscar" placeholder="buscar" class="col-lg-6 col-md-12 col-sm-12 col-xs-12")
+
+                div( id="box-add" class="row justify-content-end col-lg-2 col-md-2 col-sm-2 col-xs-2 ")
+                    div( class="col-lg-12 col-md-12 col-sm-12 col-xs-12")
+                        button(class="icon-btn add-btn")
+                            div(class="add-icon")
+                            div(class="btn-txt") 
+                                a(href="/photo/view/almacenar" style="text-decoration:none; color:black;") Add Photo
+
+                each photo in photos
+
+                    div(id="contain-card" class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4")
+
+                        div( id="img-profile" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
+                            img(src=`/${photo.User.profileImage}`)  
+
+                        div( id="category-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
+                            i=photo.category    
+
+                        div( class=" my-2 mx-0 row justify-content-center  col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ")
+                            div(id="photo-card")
+                                img(src=`/${photo.image}`)
+
+                        div( id="name-card" class="col-lg-8  col-md-8  col-sm-8 col-xs-12")
+                            i name: #{photos[0].User.name+" "+photos[0].User.surname} 
+
+                        div( id="date-card" class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 ")
+                            i=photo.creationDate
+
+                        div( id="stars-card" class=" col-lg-12  col-md-12  col-sm-12 col-xs-12 ")
+                            div(class="ec-stars-wrapper")
+                                a(href=`/photo/rating/${photo.id}/1` data-value="1" title="Votar con 1 estrellas") ★
+                                a(href=`/photo/rating/${photo.id}/2` data-value="2" title="Votar con 2 estrellas") ★
+                                a(href=`/photo/rating/${photo.id}/3` data-value="3" title="Votar con 3 estrellas") ★
+                                a(href=`/photo/rating/${photo.id}/4` data-value="4" title="Votar con 4 estrellas") ★
+                                a(href=`/photo/rating/${photo.id}/5` data-value="5" title="Votar con 5 estrellas") ★
+
+                        div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12")
+                            p Promedio valoracion:
+                                i #{photo.numberOfStars}
+
+                        div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2")
+                            details
+                                summary Etiquetas
+                                each label in labels 
+                                    if label.idPhoto == photo.id
+                                        p=label.keyword
+
+                        div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2")
+                            a(id="abrirComments" href=`/comment/view/${photo.id}`) comentarios
+
+                        div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-3")
+                            button(id="compartir-btn" onclick=`abrirMenuShare(${photo.id})` class="col-lg-2 col-md-4 col-sm-4 col-xs-3 my-1")
+
+                                div(class="svg-wrapper-1")
+                                    div(class="svg-wrapper")
+                                        svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24")
+                                            path(fill="none" d="M0 0h24v24H0z")
+                                            path(fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z")
+                                span Share 
+
+
+        div( id="datos" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12  py-5")      
+
+            div( id="footer" class="row justify-content-center col-lg-11 col-md-11 col-sm-11 col-xs-11 my-5 p-5") 
+
+                div(id="card-move" class="col-lg-11 col-md-11 col-sm-11 col-xs-12 my-5")
+                    div 
+                div(id="card" class="col-lg-3 col-md-11 col-sm-11 col-xs-4 m-5")
+                div(id="carde" class="col-lg-3 col-md-4 col-sm-5 col-xs-12 ")
+                    div(id="card-image")
+                        img(src="/images/910923.png")
+                    div(id="category") Illustration
+                    div(id="heading") A heading that must span over two lines
+                    div(id="author") By span class="name" Abi 4 days ago
+                div(id="card" class="col-lg-3 col-md-11 col-sm-11 col-xs-4 m-5")
+
