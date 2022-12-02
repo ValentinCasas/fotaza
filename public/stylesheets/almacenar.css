@@ -1,0 +1,210 @@
+@font-face {
+    font-family: miFuente;
+    src: url(/P22MackinacPro-Bold_16.otf);
+}
+
+
+body{
+    background-image: url(/910923.png);
+}
+
+#nav-bar {
+    /* background: rgba(2, 0, 36, 0.288); */
+    margin-right: 1px;
+    background-color: #fff;
+    margin-top: -5px;
+    height: 70px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+body::-webkit-scrollbar,
+#box-cards::-webkit-scrollbar,
+#top-photos::-webkit-scrollbar {
+    width: 1px;
+}
+
+body::-webkit-scrollbar-track,
+#box-cards::-webkit-scrollbar-track,
+#top-photos::-webkit-scrollbar-track {
+    background: rgb(0, 0, 0);
+}
+
+body::-webkit-scrollbar-thumb,
+#box-cards::-webkit-scrollbar-thumb,
+#top-photos::-webkit-scrollbar-thumb {
+    background: linear-gradient(121deg, rgb(0, 0, 0) 37%, rgba(73, 27, 164, 1) 74%, rgba(112, 21, 247, 1) 88%);
+
+}
+
+@font-face {
+    font-family: miFuente;
+    src: url(/fonts/P22MackinacPro-Bold_16.otf);
+}
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  /*   border: .5px solid rgb(90, 83, 83); */
+    font-family: miFuente;
+}
+
+#fotaza {
+    --gradien-right: #B54FF3;
+    --gradien-left: #4f46e5;
+    background: linear-gradient(var(--gradien-right), var(--gradien-left));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+#contain-profile-icon{
+    display:flex;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+    background: linear-gradient(145deg, #ffffff, #ffffff80, #995ebbc0);
+}
+
+#profile-icon{
+    width: 50px;
+    height: 40px;
+    color:rgb(58, 26, 100);
+}
+
+.drop-area{
+    border:5px dashed rgb(73, 173, 204);
+    height: 400px;
+    border-radius: 5px;
+}
+
+.drop-area.active{
+    border:2px dashed #00ff0d;
+    color:black;
+    background-color: #b8d4fe;
+}
+
+.drop-area h2{
+    font-size: 30px;
+    font-weight: 500;
+    color:rgb(73, 173, 204);
+}
+
+.drop-area span{
+    font-size: 25px;
+    color:rgb(73, 173, 204);
+}
+
+.drop-area button, #submitPhoto{
+    padding: 10px 25px;
+    font-size: 20px;
+    border:0;
+    outline: none;
+    background-color: #5256ad;
+    color:white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin:20px;
+}
+
+.file-container{
+    display:flex;
+    align-items: center;
+    gap:10px;
+    padding:10px;
+    border:solid 1px #ddd;
+}
+
+#preview{
+    margin-top:10px;
+    color:rgb(73, 173, 204);
+}
+
+.status-text{
+    padding:0 10px;
+}
+
+.success{
+    color:#52ad5a;
+}
+.failure{
+    color:#ff0000;
+}
+
+
+form{
+
+    padding: 40px;
+    background: linear-gradient(#412185, #180f4b);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 10px;
+}
+
+#almacenar .data-photo-box{
+    position: relative;
+}
+
+#almacenar .data-photo-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+#almacenar .data-photo-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+#almacenar .data-photo-box input:focus~label,
+#almacenar .data-photo-box input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+}
+
+#submitPhoto {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #191d46;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s ;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    border-radius: 5px;
+background: linear-gradient(145deg, #cacaca88, #4825808a);
+
+}
+
+#submitPhoto:hover {
+    background: #24237c;
+    color: #03e9f4;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4;
+}
+
+label{
+    color:rgb(184, 174, 174);
+}
+
+#almacenar-img img{
+    width: 100%;
+    height: 100%;
+}

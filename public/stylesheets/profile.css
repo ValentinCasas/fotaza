@@ -1,0 +1,95 @@
+@font-face {
+    font-family: miFuente;
+    src: url(/P22MackinacPro-Bold_16.otf);
+}
+
+
+body {
+    background-image: url(/910923.png);
+}
+
+
+body::-webkit-scrollbar,
+#box-cards::-webkit-scrollbar,
+#top-photos::-webkit-scrollbar {
+    width: 1px;
+}
+
+body::-webkit-scrollbar-track,
+#box-cards::-webkit-scrollbar-track,
+#top-photos::-webkit-scrollbar-track {
+    background: rgb(0, 0, 0);
+}
+
+body::-webkit-scrollbar-thumb,
+#box-cards::-webkit-scrollbar-thumb,
+#top-photos::-webkit-scrollbar-thumb {
+    background: linear-gradient(121deg, rgb(0, 0, 0) 37%, rgba(73, 27, 164, 1) 74%, rgba(112, 21, 247, 1) 88%);
+
+}
+
+@font-face {
+    font-family: miFuente;
+    src: url(/fonts/P22MackinacPro-Bold_16.otf);
+}
+
+
+* {
+    /*     border: .1px solid #b4afaf; */
+    color: white;
+}
+
+#img-profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+#card-img {
+    background-color: rgba(255, 255, 255, 0.356);
+}
+
+
+#card-img img {
+    height: 300px;
+    width: 100%;
+    object-fit: contain;
+}
+
+#abrirComments {
+    transition: .5s ease all;
+    text-decoration: none;
+    color: #000;
+}
+
+
+#delete-photo {
+    display: flex;
+    justify-content: center;
+}
+
+#delete {
+    width: 40px;
+    height: 40px;
+    color: rgb(119, 21, 21);
+}
+
+#cerrar-comments {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    transition: 1s ease all;
+    z-index: 51;
+}
+
+#icon-cerrar-comment {
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+}
+
+#details{
+    font-size: 40px;
+}
