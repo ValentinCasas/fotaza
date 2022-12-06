@@ -135,6 +135,7 @@ body::-webkit-scrollbar-thumb,
     border-radius: 50%;
     transition: .5s ease all;
     border: .5px solid rgba(0, 0, 0, 0.116);
+
 }
 
 #top-img:hover {
