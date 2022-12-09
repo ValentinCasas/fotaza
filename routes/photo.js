@@ -10,5 +10,6 @@ router.get('/sort/:manera', isAutenticatedBD, photoController.sortPhoto);
 router.post('/almacenar/submitPhoto', isAutenticatedBD, photoController.submitPhoto);
 router.get('/delete/:id',isAutenticatedBD ,photoController.deletePhoto);
 router.get('/rating/:id/:numStar',isAutenticatedBD , photoController.ratingPhoto)
+router.post('/buscar',isAutenticatedBD,photoController.buscarPhotos)
 
 module.exports = router; 

@@ -771,3 +771,49 @@ p {
 
 
 
+
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.74);
+  }
+  
+  .slider-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+justify-content: center;
+  }
+  
+  .slider-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    
+  }
+  
+  .slider-prev, .slider-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+  }
+  
+  .slider-prev {
+    left: 0;
+  }
+  
+  .slider-next {
+    right: 0;
+  }

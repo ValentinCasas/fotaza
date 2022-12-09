@@ -1,6 +1,43 @@
 const { Comment, Label, Photo, Photorating, User } = require("../models");
 const uuid = require("uuid");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
+/* post /buscar */
+exports.buscarPhotos = async function (req, res) {
+    const frase = req.body.buscar;
+    console.log(frase);
+
+    const users = await User.findAll();
+    const labels = await Label.findAll({ include: Photo });
+
+    let photos = Photo.findAll({
+        where: { title: { [Op.like]: frase } },
+        offset: 0,
+        limit: 40,
+        include: User,
+    });
+
+    photos = await Promise.all([
+        photos,
+        Label.findAll({
+            where: { keyword: { [Op.like]: frase } },
+            offset: 0,
+            limit: 40,
+            group: ['idPhoto'],
+        })
+            .then(b =>
+                Promise.all(
+                    b.map(label =>
+                        Photo.findAll({ where: { id: label.idPhoto }, include: User })
+                    )
+                )
+            )
+            .then(b => b.map(photo => photo[0].toJSON())),
+    ]);
+
+    res.render("home", { photos: photos[0].concat(photos[1]), labels, users });
+};
 
 /* get /delete/:id */
 exports.deletePhoto = async function (req, res, next) {
@@ -8,7 +45,7 @@ exports.deletePhoto = async function (req, res, next) {
 
     Comment.destroy({ where: { idPhoto: id } })
     Label.destroy({ where: { idPhoto: id } })
-    Photorating.destroy({ where: { idPhoto: id }});
+    Photorating.destroy({ where: { idPhoto: id } });
     Photo.destroy({ where: { id: id } })
 
     res.redirect("/user/profile");
