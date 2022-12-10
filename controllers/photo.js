@@ -1,6 +1,7 @@
 const { Comment, Label, Photo, Photorating, User } = require("../models");
 const uuid = require("uuid");
 const Sequelize = require('sequelize');
+const Jimp = require('jimp');
 const Op = Sequelize.Op;
 
 /* post /buscar */
@@ -51,7 +52,6 @@ exports.deletePhoto = async function (req, res, next) {
     res.redirect("/user/profile");
 }
 
-
 /* get / */
 exports.cargarDatos = async function (req, res, next) {
     const photos = await Photo.findAll({ include: User });
@@ -101,7 +101,6 @@ exports.sortPhoto = async function (req, res, next) {
     res.render("home", { photos: photos, labels: labels, users: users })
 }
 
-
 /* get '/target-top/:id' */
 exports.viewTarget = async function (req, res) {
 
@@ -111,13 +110,11 @@ exports.viewTarget = async function (req, res) {
     res.render("target-view-top", { photos: photos })
 };
 
-
 /* get '/view/almacenar' */
 exports.viewAlmacenarPhoto = function (req, res) {
 
     res.redirect("/almacenar");
 };
-
 
 /* post '/submitPhoto' */
 exports.submitPhoto = async function (req, res) {
@@ -126,9 +123,21 @@ exports.submitPhoto = async function (req, res) {
     const { imagen } = req.files;
     const users = await User.findAll({ where: { sessionId: req.sessionID } });
 
+
+
+    const image1 = await Jimp.read
+        (imagen.data);
+    const image2 = await Jimp.read
+        (imagen.data);
+    image2.resize(40, 40);
+    //call to blit function 
+    image1.blit(image2, 90, 90)
+
+
     const rutaImagen = uuid.v1() + imagen.name;
     console.log(rutaImagen);
-    imagen.mv("./public/images/" + rutaImagen);
+    image1.write('./public/images/' + rutaImagen);
+
 
 
     const tiempoTranscurrido = Date.now();
