@@ -3,46 +3,77 @@ const uuid = require("uuid");
 const Sequelize = require('sequelize');
 const Jimp = require('jimp');
 const Op = Sequelize.Op;
+const fs = require("fs");
 
 /* post /buscar */
 exports.buscarPhotos = async function (req, res) {
     const frase = req.body.buscar;
-    console.log(frase);
-
     const users = await User.findAll();
     const labels = await Label.findAll({ include: Photo });
 
-    let photos = Photo.findAll({
+    let photos = await Photo.findAll({
         where: { title: { [Op.like]: frase } },
         offset: 0,
         limit: 40,
         include: User,
     });
 
-    photos = await Promise.all([
-        photos,
-        Label.findAll({
-            where: { keyword: { [Op.like]: frase } },
-            offset: 0,
-            limit: 40,
-            group: ['idPhoto'],
-        })
-            .then(b =>
-                Promise.all(
-                    b.map(label =>
-                        Photo.findAll({ where: { id: label.idPhoto }, include: User })
-                    )
-                )
-            )
-            .then(b => b.map(photo => photo[0].toJSON())),
-    ]);
+    let photosWithoutDuplicates = [];
 
-    res.render("home", { photos: photos[0].concat(photos[1]), labels, users });
+    photos = await Promise.all([photos, Label.findAll({
+        where: { keyword: { [Op.like]: frase } },
+        offset: 0,
+        limit: 40,
+    })
+        .then(b => Promise.all(
+            b.map(label => Photo.findAll(
+                { where: { id: label.idPhoto }, include: User }
+            ))
+        ))
+    ])
+        .then(photos => {
+            photosWithoutDuplicates = Array.from(new Set([...photos[0], ...photos[1]]));
+
+        });
+
+    res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req });
 };
+
+
 
 /* get /delete/:id */
 exports.deletePhoto = async function (req, res, next) {
     const id = req.params.id;
+    const photos = await Photo.findAll({ where: { id: id } }).then(response => {
+        fs.unlink(`./public/images/${response[0].image}`, function (err) {
+            if (err) {
+                console.log("Hubo un error al intentar borrar el archivo: ", err);
+            } else {
+                console.log("El archivo se ha borrado correctamente");
+            }
+        });
+
+        if (response[0].imageWatermark) {
+            fs.unlink(`./public/imagesWatermark/${response[0].imageWatermark}`, function (err) {
+                if (err) {
+                    console.log("Hubo un error al intentar borrar el archivo: ", err);
+                } else {
+                    console.log("El archivo se ha borrado correctamente");
+                }
+            })
+        }
+
+        if (response[0].imageWatermarkFotaza) {
+            fs.unlink(`./public/imagesWatermarkFotaza/${response[0].imageWatermarkFotaza}`, function (err) {
+                if (err) {
+                    console.log("Hubo un error al intentar borrar el archivo: ", err);
+                } else {
+                    console.log("El archivo se ha borrado correctamente");
+                }
+            })
+        }
+    })
+
 
     Comment.destroy({ where: { idPhoto: id } })
     Label.destroy({ where: { idPhoto: id } })
@@ -121,33 +152,33 @@ exports.submitPhoto = async function (req, res) {
     let { title, privacy, category, label1, label2, label3, rightOfUse } = req.body;
 
     const { imagen, watermark } = req.files;
+    let rutaImagenWatermark = '';
+    let rutaImagenWatermarkFotaza = '';
+
     const users = await User.findAll({ where: { sessionId: req.sessionID } });
-    let rutaImagenWatermark = "";
-    let rutaImagenWatermarkFotaza = "";
 
     /* PARA LAS IMAGENES SIN MARCA DE AGUA */
     const rutaImagen = uuid.v1() + imagen.name;
     imagen.mv('./public/images/' + rutaImagen);
-
-
-    const tiempoTranscurrido = Date.now();
-    const fechaCreacion = new Date(tiempoTranscurrido);
-    fechaCreacion.toLocaleDateString()
 
     if (rightOfUse == "Copyright") {
         privacy = "private";
 
         const image1 = await Jimp.read(imagen.data);
         const image2 = await Jimp.read(watermark ? watermark.data : imagen.data);
-        image2.resize(60, 60);
+
         image2.circle(40);
-        image1.blit(image2, 60, 60)
+
+        const anchoImagen3 = image1.bitmap.width;
+        image2.resize(anchoImagen3, anchoImagen3);
+        image2.opacity(0.5)
+        image1.blit(image2, 0, 0)
 
         rutaImagenWatermark = uuid.v1() + imagen.name;
         image1.write('./public/imagesWatermark/' + rutaImagenWatermark);
     }
 
-    if (privacy == "public") {
+    if (privacy == "public" && rightOfUse != "Copyright") {
         const image3 = await Jimp.read(imagen.data);
         const image4 = await Jimp.read('public/imagesWatermarkFotaza/template.png');
 
@@ -160,6 +191,10 @@ exports.submitPhoto = async function (req, res) {
         image3.write('./public/imagesWatermarkFotaza/' + rutaImagenWatermarkFotaza);
     }
 
+
+    const tiempoTranscurrido = Date.now();
+    const fechaCreacion = new Date(tiempoTranscurrido);
+    fechaCreacion.toLocaleDateString()
 
     Photo.create({
         privacy: privacy,
@@ -196,15 +231,12 @@ exports.submitPhoto = async function (req, res) {
             })
         }
 
-
-
     }).catch(err => {
         console.log("Hubo un error al cargar la imagen :/")
     })
 
     res.redirect("/photo");
 };
-
 
 /* get /rating/:id/:numStar */
 exports.ratingPhoto = async function (req, res) {
