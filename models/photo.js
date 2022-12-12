@@ -11,16 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Photo.belongsTo(models.User,{foreignKey:'idOwner'});
-      Photo.hasMany(models.Label, {foreignKey:'id'});
-      Photo.hasMany(models.Photorating, {foreignKey:'id'});
-      Photo.hasMany(models.Comment, {foreignKey:'id'});
+      Photo.belongsTo(models.User, { foreignKey: 'idOwner' });
+      Photo.hasMany(models.Label, { foreignKey: 'id' });
+      Photo.hasMany(models.Photorating, { foreignKey: 'id' });
+      Photo.hasMany(models.Comment, { foreignKey: 'id' });
     }
   }
   Photo.init({
     privacy: DataTypes.STRING,
     idOwner: DataTypes.INTEGER,
     image: DataTypes.STRING,
+    imageWatermark: DataTypes.STRING,
+    imageWatermarkFotaza: DataTypes.STRING,
     title: DataTypes.STRING,
     category: DataTypes.STRING,
     creationDate: DataTypes.DATE,
@@ -28,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     resolution: DataTypes.INTEGER,
     rightOfUse: DataTypes.STRING,
     numberOfStars: DataTypes.FLOAT,
-    
+
   }, {
     sequelize,
     modelName: 'Photo',

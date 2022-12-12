@@ -107,7 +107,12 @@ html
 
                         div( class=" my-2 mx-0 row justify-content-center  col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ")
                             div(id="photo-card")
-                                img(src=`/${photo.image}`)
+                                if photo.privacy == "private"
+                                    img(src=`/${photo.imageWatermark}`)
+                                else if photo.privacy == "public" && !req.session.isLoggedIn
+                                    img(src=`/${photo.imageWatermarkFotaza}`)
+                                else if photo.privacy != "private" && req.session.isLoggedIn
+                                    img(src=`/${photo.image}`)
 
                         div( id="name-card" class="col-lg-8  col-md-8  col-sm-8 col-xs-12")
                             i name: #{photos[0].User.name+" "+photos[0].User.surname} 
@@ -133,6 +138,10 @@ html
                                 each label in labels 
                                     if label.idPhoto == photo.id
                                         p=label.keyword
+
+                        if photo.privacy == "private"
+                            div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2")
+                                a(id="abrirComments" href=`#`) contactar autor
 
                         div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2")
                             a(id="abrirComments" href=`/comment/view/${photo.id}`) comentarios

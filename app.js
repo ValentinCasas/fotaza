@@ -39,6 +39,8 @@ app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 app.use(express.static(path.join(__dirname, 'public/javascripts')));
 app.use(express.static(path.join(__dirname, 'public/profile-images')));
 app.use(express.static(path.join(__dirname, 'public/images')));
+app.use(express.static(path.join(__dirname, 'public/imagesWatermark')));
+app.use(express.static(path.join(__dirname, 'public/imagesWatermarkFotaza')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

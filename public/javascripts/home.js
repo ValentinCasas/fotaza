@@ -36,13 +36,9 @@ const prevButton = document.querySelector('.slider-prev');
 const nextButton = document.querySelector('.slider-next');
 
 const images = [
-  '/1b9375c0-6eb8-11ed-add4-15096d32766612.jpg',
-  '/1cc1d1b0-6eba-11ed-905e-e732e539789622.jpg',
-  '/210cdf50-69cc-11ed-a26e-7bb3a8a5eb1811.jpg',
-  '/24965670-6917-11ed-aacb-ed0a57a2a3ecimagen-de-escritorio-del-minimalismo.jpg',
-  '/33291a50-69cc-11ed-a26e-7bb3a8a5eb1826.jpg',
-  '/6f1f1a10-71d7-11ed-9fea-a3f69e26f20e10.jpg',
-  '/ef95fa00-6896-11ed-8128-21ca6c543602iconoSillaMesa.png',
+  '/910923.png',
+  '/naveEspacial.jpg',
+  '/template.png'
 ];
 
 let currentIndex = 0;

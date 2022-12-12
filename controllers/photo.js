@@ -60,7 +60,7 @@ exports.cargarDatos = async function (req, res, next) {
 
     /* const photoRankings = await Photorating.findAll({where:{}}); */
 
-    res.render("home", { photos: photos.reverse(), labels: labels, users: users })
+    res.render("home", { photos: photos.reverse(), labels: labels, users: users, req: req })
 }
 
 exports.sortPhoto = async function (req, res, next) {
@@ -98,7 +98,7 @@ exports.sortPhoto = async function (req, res, next) {
 
 
 
-    res.render("home", { photos: photos, labels: labels, users: users })
+    res.render("home", { photos: photos, labels: labels, users: users, req: req })
 }
 
 /* get '/target-top/:id' */
@@ -120,24 +120,14 @@ exports.viewAlmacenarPhoto = function (req, res) {
 exports.submitPhoto = async function (req, res) {
     let { title, privacy, category, label1, label2, label3, rightOfUse } = req.body;
 
-    const { imagen } = req.files;
+    const { imagen, watermark } = req.files;
     const users = await User.findAll({ where: { sessionId: req.sessionID } });
+    let rutaImagenWatermark = "";
+    let rutaImagenWatermarkFotaza = "";
 
-
-
-    const image1 = await Jimp.read
-        (imagen.data);
-    const image2 = await Jimp.read
-        (imagen.data);
-    image2.resize(40, 40);
-    //call to blit function 
-    image1.blit(image2, 90, 90)
-
-
+    /* PARA LAS IMAGENES SIN MARCA DE AGUA */
     const rutaImagen = uuid.v1() + imagen.name;
-    console.log(rutaImagen);
-    image1.write('./public/images/' + rutaImagen);
-
+    imagen.mv('./public/images/' + rutaImagen);
 
 
     const tiempoTranscurrido = Date.now();
@@ -145,13 +135,38 @@ exports.submitPhoto = async function (req, res) {
     fechaCreacion.toLocaleDateString()
 
     if (rightOfUse == "Copyright") {
-        privacy = "private"
+        privacy = "private";
+
+        const image1 = await Jimp.read(imagen.data);
+        const image2 = await Jimp.read(watermark ? watermark.data : imagen.data);
+        image2.resize(60, 60);
+        image2.circle(40);
+        image1.blit(image2, 60, 60)
+
+        rutaImagenWatermark = uuid.v1() + imagen.name;
+        image1.write('./public/imagesWatermark/' + rutaImagenWatermark);
     }
+
+    if (privacy == "public") {
+        const image3 = await Jimp.read(imagen.data);
+        const image4 = await Jimp.read('public/imagesWatermarkFotaza/template.png');
+
+        const anchoImagen3 = image3.bitmap.width;
+        const altoImagen3 = image3.bitmap.height;
+        image4.resize(anchoImagen3, altoImagen3);
+        image3.blit(image4, 0, 0)
+
+        rutaImagenWatermarkFotaza = uuid.v1() + imagen.name;
+        image3.write('./public/imagesWatermarkFotaza/' + rutaImagenWatermarkFotaza);
+    }
+
 
     Photo.create({
         privacy: privacy,
         idOwner: users[0].id,
         image: rutaImagen,
+        imageWatermark: rutaImagenWatermark,
+        imageWatermarkFotaza: rutaImagenWatermarkFotaza,
         title: title,
         category: category,
         creationDate: fechaCreacion,
