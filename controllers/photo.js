@@ -6,54 +6,73 @@ const Op = Sequelize.Op;
 const fs = require("fs");
 
 /* post /buscar */
+
 exports.buscarPhotos = async function (req, res) {
     const frase = req.body.buscar;
     const users = await User.findAll();
     const labels = await Label.findAll({ include: Photo });
 
-    let photos = await Photo.findAll({
-        where: { title: { [Op.like]: frase } },
+    // Obtener fotos cuyo título coincide con la frase
+    const photosByTitle = await Photo.findAll({
+        where: {
+            title: { [Op.like]: '%' + frase + '%' }
+        },
         offset: 0,
         limit: 40,
-        include: User,
+        include: User
     });
 
-    let photosWithoutDuplicates = [];
-
-    photos = await Promise.all([photos, Label.findAll({
-        where: { keyword: { [Op.like]: frase } },
+    const labelsByKeyword = await Label.findAll({
+        where: {
+            keyword: { [Op.like]: '%' + frase + '%' }
+        },
         offset: 0,
         limit: 40,
-    })
-        .then(b => Promise.all(
-            b.map(label => Photo.findAll(
-                { where: { id: label.idPhoto }, include: User }
-            ))
-        ))
-    ])
-        .then(photos => {
-            photosWithoutDuplicates = Array.from(new Set([...photos[0], ...photos[1]]));
+    });
 
-        });
+    // Obtener fotos cuyo id coincide con el id de la foto de una etiqueta que coincide con la frase
+    const photosByLabel = await Photo.findAll({
+        where: {
+            id: { [Op.in]: labelsByKeyword.map(label => label.idPhoto) }
+        },
+        offset: 0,
+        limit: 40,
+        include: User
+    });
+
+    function removeDuplicates(arr) {
+        const unique = new Set();
+        // Recorrer el array y almacenar cada objeto en forma de cadena de texto
+        // en el conjunto (Set)
+        arr.forEach(obj => unique.add(JSON.stringify(obj)));
+        // Devolver el array de objetos únicos
+        return Array.from(unique).map(obj => JSON.parse(obj));
+    }
+
+    // Combinar resultados y eliminar duplicados
+    const photos = [...photosByTitle, ...photosByLabel];
+    const photosWithoutDuplicates = removeDuplicates(photos);
+
 
     res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req });
 };
-
-
 
 /* get /delete/:id */
 exports.deletePhoto = async function (req, res, next) {
     const id = req.params.id;
     const photos = await Photo.findAll({ where: { id: id } }).then(response => {
-        fs.unlink(`./public/images/${response[0].image}`, function (err) {
-            if (err) {
-                console.log("Hubo un error al intentar borrar el archivo: ", err);
-            } else {
-                console.log("El archivo se ha borrado correctamente");
-            }
-        });
 
-        if (response[0].imageWatermark) {
+        if (response[0].image && fs.existsSync(`./public/imagesWatermark/${response[0].image}`)) {
+            fs.unlink(`./public/images/${response[0].image}`, function (err) {
+                if (err) {
+                    console.log("Hubo un error al intentar borrar el archivo: ", err);
+                } else {
+                    console.log("El archivo se ha borrado correctamente");
+                }
+            });
+        }
+
+        if (response[0].imageWatermark && fs.existsSync(`./public/imagesWatermark/${response[0].imageWatermark}`)) {
             fs.unlink(`./public/imagesWatermark/${response[0].imageWatermark}`, function (err) {
                 if (err) {
                     console.log("Hubo un error al intentar borrar el archivo: ", err);
@@ -63,7 +82,7 @@ exports.deletePhoto = async function (req, res, next) {
             })
         }
 
-        if (response[0].imageWatermarkFotaza) {
+        if (response[0].imageWatermarkFotaza && fs.existsSync(`./public/imagesWatermark/${response[0].imageWatermarkFotaza}`)) {
             fs.unlink(`./public/imagesWatermarkFotaza/${response[0].imageWatermarkFotaza}`, function (err) {
                 if (err) {
                     console.log("Hubo un error al intentar borrar el archivo: ", err);
@@ -170,8 +189,8 @@ exports.submitPhoto = async function (req, res) {
         image2.circle(40);
 
         const anchoImagen3 = image1.bitmap.width;
-        image2.resize(anchoImagen3, anchoImagen3);
-        image2.opacity(0.5)
+        image2.resize(anchoImagen3 / 2, anchoImagen3 / 2);
+        image2.opacity(0.2)
         image1.blit(image2, 0, 0)
 
         rutaImagenWatermark = uuid.v1() + imagen.name;

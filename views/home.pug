@@ -20,7 +20,8 @@ html
 
         nav( id="nav-bar")
             div( class="col-lg-10 col-md-10 col-sm-10 col-xs-10")
-                h1( id="fotaza") Fotaza
+                a(id="fotaza" href="/photo") 
+                    h1( id="fotaza") Fotaza
             div(id="contain-profile-icon" class="col-lg-2 col-md-2 col-sm-2 col-xs-2")
                 a(href="/user/profile")
                     ion-icon(name="person-circle-sharp" id="profile-icon")                
@@ -115,7 +116,7 @@ html
                                     img(src=`/${photo.image}`)
 
                         div( id="name-card" class="col-lg-8  col-md-8  col-sm-8 col-xs-12")
-                            i name: #{photos[0].User.name+" "+photos[0].User.surname} 
+                            i name: #{photo.User.name+" "+photo.User.surname} 
 
                         div( id="date-card" class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 ")
                             i=photo.creationDate

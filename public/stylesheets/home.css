@@ -30,6 +30,7 @@ body {
     margin-top: -5px;
     height: 70px;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    
 }
 
 body::-webkit-scrollbar,
