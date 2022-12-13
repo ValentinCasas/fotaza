@@ -37,7 +37,7 @@ const nextButton = document.querySelector('.slider-next');
 
 const images = [
   '/910923.png',
-  '/naveEspacial.jpg',
+
   '/template.png'
 ];
 

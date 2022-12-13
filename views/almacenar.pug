@@ -24,9 +24,9 @@ html
                 a(href="/user/profile")
                     ion-icon(name="person-circle-sharp" id="profile-icon")          
 
-        div( id="almacenar" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-5  p-4")
+        div( id="almacenar" class="row justify-content-center col-lg-10 col-md-8 col-sm-12 col-xs-12 my-5  p-4")
 
-            form( action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data' class="row justify-content-center col-lg-8 col-md-8 col-sm-8 col-xs-12")
+            form( action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data' class="row justify-content-center col-lg-11 col-md-11 col-sm-11 col-xs-11 mx-2" )
 
                 div( class="data-photo-box my-5")
                     input( type="text" name="title" required="")
@@ -85,8 +85,9 @@ html
 
                 button(id="submitPhoto" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-4 p-4") Subir
 
-            div(id="almacenar-img" class="row justify-content-center col-lg-4 col-md-4 col-sm-4 col-xs-12 p-0")
-                img(src="/naveEspacial.jpg")
+        div(class="row justify-content-center  col-lg-2 col-md-4 my-5")
+
+            img(src="/like.png"  height="400px" style="z-index:-10;")
 
 
 
