@@ -186,11 +186,12 @@ exports.submitPhoto = async function (req, res) {
         const image1 = await Jimp.read(imagen.data);
         const image2 = await Jimp.read(watermark ? watermark.data : imagen.data);
 
-        image2.circle(40);
+        /* image2.circle(40); */
 
         const anchoImagen3 = image1.bitmap.width;
-        image2.resize(anchoImagen3 / 2, anchoImagen3 / 2);
-        image2.opacity(0.2)
+        const altoImagen3 = image1.bitmap.height;
+        image2.resize(anchoImagen3,altoImagen3);
+        image2.opacity(0.5)
         image1.blit(image2, 0, 0)
 
         rutaImagenWatermark = uuid.v1() + imagen.name;

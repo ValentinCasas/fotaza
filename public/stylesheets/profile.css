@@ -33,6 +33,9 @@ body::-webkit-scrollbar-thumb,
     src: url(/fonts/P22MackinacPro-Bold_16.otf);
 }
 
+#contain-cards{
+    background-color: rgba(200, 207, 207, 0.363);
+}
 
 * {
     /*     border: .1px solid #b4afaf; */
@@ -93,3 +96,6 @@ body::-webkit-scrollbar-thumb,
 #details{
     font-size: 40px;
 }
+
+
+

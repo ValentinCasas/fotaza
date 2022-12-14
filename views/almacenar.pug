@@ -66,9 +66,10 @@ html
                             ion-icon(name="list-outline" style="font-size: 32px")
                             i(style="font-size: 10px") click me
 
-                        p -Si su imagen va a tener como derecho de autor Copyright, debera subir una imagen.
-                        p -En el caso de que suba una imagen y no este utilizando Copyright, entonces no se tomara en cuenta. 
-                        input(type="file" name="watermark" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control btn-primary p-1"
+                        p(class="my-4") - Si su imagen va a tener como derecho de autor Copyright, debera subir una imagen.
+                        p(class="my-4") - En el caso que este usando Copyright y no seleccione una foto, de tomara la imagen original como marca de agua.
+                        p(class="my-4") - En el caso de que suba una imagen y no este utilizando Copyright, entonces no se tomara en cuenta. 
+                        input(type="file" name="watermark" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control btn-info p-1"
                             accept="image/jpeg,image/jpg,image/png")    
 
                 div( class="data-photo-box my-5 ")
@@ -86,7 +87,6 @@ html
                 button(id="submitPhoto" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-4 p-4") Subir
 
         div(class="row justify-content-center  col-lg-2 col-md-4 my-5")
-
             img(src="/like.png"  height="400px" style="z-index:-10;")
 
 

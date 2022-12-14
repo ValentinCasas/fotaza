@@ -17,7 +17,6 @@ html
         a(id="cerrar-comments" href="/photo")
             ion-icon(name="close" id="icon-cerrar-comment")
 
-
         div(id="img-profile" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4") 
             img(src=`/${users[0].profileImage}`)
 
@@ -26,8 +25,9 @@ html
         div(class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12")     
             p intereses: #{users[0].interests}    
 
-        div(id="contain-cards" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-5 p-4")
+        div(id="contain-cards" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-5 mx-0 p-4")
             each photo in photos 
+
                 div(id="card-img" class="row justify-content-center col-lg-3 col-md-10 col-sm-10 col-xs-10 my-2 mx-5") 
                     i=photo.category    
                     img(src=`/${photo.image}`)
@@ -40,6 +40,6 @@ html
                     div(id="delete-photo" class=" col-lg-10 col-md-10 col-sm-10 col-xs-10 ")                   
                         details 
                             summary 
-                             ion-icon(id="details" name="chevron-down-sharp")
+                                ion-icon(id="details" name="chevron-down-sharp")
                             a(href=`/photo/delete/${photo.id}`)
                                 ion-icon(id="delete" name="trash")
