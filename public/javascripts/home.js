@@ -27,18 +27,15 @@ function abrirMenuShare(id) {
 }
 
 
-
-
-
 const slider = document.querySelector('.slider');
 const sliderImages = document.querySelector('.slider-images');
 const prevButton = document.querySelector('.slider-prev');
 const nextButton = document.querySelector('.slider-next');
 
 const images = [
-  '/910923.png',
+    '/910923.png',
 
-  '/template.png'
+    '/template.png'
 ];
 
 let currentIndex = 0;
@@ -77,6 +74,3 @@ prevButton.addEventListener('click', showPrevImage);
 nextButton.addEventListener('click', showNextImage);
 
 addImage(images[currentIndex]);
-
-
-

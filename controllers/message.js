@@ -1,4 +1,22 @@
-const { Comment, Label, Photo, Photorating, User, Message } = require("../models");
+const { Comment, Label, Photo, Photorating, User, Message, MsgBuyPhoto } = require("../models");
+
+/* get /buy/:idPhoto/:idOwner */
+
+exports.buyPhoto = async function (req, res) {
+    const { idPhoto, idOwner } = req.params;
+    const mensaje = req.query.mensaje;
+
+    const user = await User.findAll({ where: { sessionID: req.sessionID } })
+
+    MsgBuyPhoto.create({
+        idPhoto: idPhoto,
+        idOwner: idOwner,
+        idUserEmitting: user[0].id,
+        description: mensaje,
+    })
+
+    res.redirect("/photo");
+}
 
 /* post /share */
 exports.sendMessage = async function (req, res, next) {
@@ -16,6 +34,17 @@ exports.sendMessage = async function (req, res, next) {
     })
 
     res.redirect("/photo");
+}
+
+/* get /view/myOffers */
+
+exports.myOffers = async function (req, res) {
+    const users = await User.findAll({ where: { sessionId: req.sessionID } });
+    const id = users[0].id;
+
+    const messages = await MsgBuyPhoto.findAll({ where: { idOwner: id }, include: [User, Photo] })
+
+    res.render("myOffers", { messages: messages.reverse() })
 }
 
 /* get /view/myMessages */
