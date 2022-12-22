@@ -1,4 +1,4 @@
-const { Comment, Label, Photo, Photorating, User } = require("../models");
+const { Comment, Label, Photo, Message, Photorating, User, MsgBuyPhoto } = require("../models");
 const uuid = require("uuid");
 const Sequelize = require('sequelize');
 const Jimp = require('jimp');
@@ -60,9 +60,10 @@ exports.buscarPhotos = async function (req, res) {
 /* get /delete/:id */
 exports.deletePhoto = async function (req, res, next) {
     const id = req.params.id;
-    const photos = await Photo.findAll({ where: { id: id } }).then(response => {
 
-        if (response[0].image && fs.existsSync(`./public/imagesWatermark/${response[0].image}`)) {
+    const photos = Photo.findAll({ where: { id: id } }).then(response => {
+
+        if (response[0].image && fs.existsSync(`./public/images/${response[0].image}`)) {
             fs.unlink(`./public/images/${response[0].image}`, function (err) {
                 if (err) {
                     console.log("Hubo un error al intentar borrar el archivo: ", err);
@@ -82,7 +83,7 @@ exports.deletePhoto = async function (req, res, next) {
             })
         }
 
-        if (response[0].imageWatermarkFotaza && fs.existsSync(`./public/imagesWatermark/${response[0].imageWatermarkFotaza}`)) {
+        if (response[0].imageWatermarkFotaza && fs.existsSync(`./public/imagesWatermarkFotaza/${response[0].imageWatermarkFotaza}`)) {
             fs.unlink(`./public/imagesWatermarkFotaza/${response[0].imageWatermarkFotaza}`, function (err) {
                 if (err) {
                     console.log("Hubo un error al intentar borrar el archivo: ", err);
@@ -91,13 +92,15 @@ exports.deletePhoto = async function (req, res, next) {
                 }
             })
         }
+
+        Comment.destroy({ where: { idPhoto: id } })
+        Label.destroy({ where: { idPhoto: id } })
+        Photorating.destroy({ where: { idPhoto: id } });
+        MsgBuyPhoto.destroy({ where: { idPhoto: id } })
+        Message.destroy({ where: { description: response[0].image } });
+        Photo.destroy({ where: { id: id } })
     })
 
-
-    Comment.destroy({ where: { idPhoto: id } })
-    Label.destroy({ where: { idPhoto: id } })
-    Photorating.destroy({ where: { idPhoto: id } });
-    Photo.destroy({ where: { id: id } })
 
     res.redirect("/user/profile");
 }
@@ -113,6 +116,7 @@ exports.cargarDatos = async function (req, res, next) {
     res.render("home", { photos: photos.reverse(), labels: labels, users: users, req: req })
 }
 
+/* get /sort/:manera */
 exports.sortPhoto = async function (req, res, next) {
     let photos = await Photo.findAll({ include: User });
     const users = await User.findAll();
@@ -168,9 +172,9 @@ exports.viewAlmacenarPhoto = function (req, res) {
 
 /* post '/submitPhoto' */
 exports.submitPhoto = async function (req, res) {
-    let { title, privacy, category, label1, label2, label3, rightOfUse } = req.body;
 
     const { imagen, watermark } = req.files;
+    let { title, privacy, category, label1, label2, label3, rightOfUse } = req.body;
     let rutaImagenWatermark = '';
     let rutaImagenWatermarkFotaza = '';
 
@@ -185,13 +189,10 @@ exports.submitPhoto = async function (req, res) {
 
         const image1 = await Jimp.read(imagen.data);
         const image2 = await Jimp.read(watermark ? watermark.data : imagen.data);
-
-        /* image2.circle(40); */
-
         const anchoImagen3 = image1.bitmap.width;
         const altoImagen3 = image1.bitmap.height;
-        image2.resize(anchoImagen3,altoImagen3);
-        image2.opacity(0.5)
+        image2.resize(anchoImagen3, altoImagen3);
+        image2.opacity(0.2)
         image1.blit(image2, 0, 0)
 
         rutaImagenWatermark = uuid.v1() + imagen.name;
@@ -200,17 +201,15 @@ exports.submitPhoto = async function (req, res) {
 
     if (privacy == "public" && rightOfUse != "Copyright") {
         const image3 = await Jimp.read(imagen.data);
-        const image4 = await Jimp.read('public/imagesWatermarkFotaza/template.png');
-
+        const image4 = await Jimp.read('public/imagesImportant/template.png');
         const anchoImagen3 = image3.bitmap.width;
         const altoImagen3 = image3.bitmap.height;
-        image4.resize(anchoImagen3, altoImagen3);
-        image3.blit(image4, 0, 0)
+        image4.resize(anchoImagen3 * 2, altoImagen3 * 2);
+        image3.blit(image4, -20, -20)
 
         rutaImagenWatermarkFotaza = uuid.v1() + imagen.name;
         image3.write('./public/imagesWatermarkFotaza/' + rutaImagenWatermarkFotaza);
     }
-
 
     const tiempoTranscurrido = Date.now();
     const fechaCreacion = new Date(tiempoTranscurrido);
@@ -230,26 +229,20 @@ exports.submitPhoto = async function (req, res) {
         rightOfUse: rightOfUse
     }).then(result => {
 
-        if (label1 != "null") {
-            Label.create({
-                idPhoto: result.id,
-                keyword: label1,
-            })
-        }
+        Label.create({
+            idPhoto: result.id,
+            keyword: label1,
+        })
 
-        if (label1 != "null") {
-            Label.create({
-                idPhoto: result.id,
-                keyword: label2,
-            })
-        }
+        Label.create({
+            idPhoto: result.id,
+            keyword: label2,
+        })
 
-        if (label1 != "null") {
-            Label.create({
-                idPhoto: result.id,
-                keyword: label3,
-            })
-        }
+        Label.create({
+            idPhoto: result.id,
+            keyword: label3,
+        })
 
     }).catch(err => {
         console.log("Hubo un error al cargar la imagen :/")
