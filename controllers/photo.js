@@ -188,11 +188,11 @@ exports.submitPhoto = async function (req, res) {
         privacy = "private";
 
         const image1 = await Jimp.read(imagen.data);
-        const image2 = await Jimp.read(watermark ? watermark.data : imagen.data);
+        const image2 = await Jimp.read(watermark ? watermark.data : 'public/imagesImportant/copyright.png');
         const anchoImagen3 = image1.bitmap.width;
         const altoImagen3 = image1.bitmap.height;
         image2.resize(anchoImagen3, altoImagen3);
-        image2.opacity(0.2)
+        image2.opacity(0.5)
         image1.blit(image2, 0, 0)
 
         rutaImagenWatermark = uuid.v1() + imagen.name;
@@ -215,38 +215,31 @@ exports.submitPhoto = async function (req, res) {
     const fechaCreacion = new Date(tiempoTranscurrido);
     fechaCreacion.toLocaleDateString()
 
-    Photo.create({
-        privacy: privacy,
-        idOwner: users[0].id,
-        image: rutaImagen,
-        imageWatermark: rutaImagenWatermark,
-        imageWatermarkFotaza: rutaImagenWatermarkFotaza,
-        title: title,
-        category: category,
-        creationDate: fechaCreacion,
-        format: imagen.mimetype,
-        resolution: imagen.size,
-        rightOfUse: rightOfUse
-    }).then(result => {
+    try {
+        const result = await Photo.create({
+            privacy: privacy,
+            idOwner: users[0].id,
+            image: rutaImagen,
+            imageWatermark: rutaImagenWatermark,
+            imageWatermarkFotaza: rutaImagenWatermarkFotaza,
+            title: title,
+            category: category,
+            creationDate: fechaCreacion,
+            format: imagen.mimetype,
+            resolution: imagen.size,
+            rightOfUse: rightOfUse,
+        });
 
-        Label.create({
-            idPhoto: result.id,
-            keyword: label1,
-        })
-
-        Label.create({
-            idPhoto: result.id,
-            keyword: label2,
-        })
-
-        Label.create({
-            idPhoto: result.id,
-            keyword: label3,
-        })
-
-    }).catch(err => {
-        console.log("Hubo un error al cargar la imagen :/")
-    })
+        const labels = [label1, label2, label3];
+        for (const label of labels) {
+            await Label.create({
+                idPhoto: result.id,
+                keyword: label,
+            });
+        }
+    } catch (err) {
+        console.log("Hubo un error al cargar la imagen :/");
+    }
 
     res.redirect("/photo");
 };
