@@ -22,28 +22,29 @@
     align-items: center;
     z-index: 50;
     transition: 1s ease all;
-    
 }
 
 #box-msg {
     height: 75vh;
     overflow-y: scroll;
-background-color: #ffffff15;
+    background-color: #ffffff15;
 }
 
-#msg{
+#msg {
     word-wrap: break-word;
 }
 
 #i-msg {
-    color: #ffffff;
+    color: #9e9797;
 }
 
-#p-msg{
- 
-    color: #7a7171;
-   
-    
+#p-msg {
+    color: #cfcece;
+}
+
+i{
+    color: rgb(102, 95, 109);
+    margin-left: 3px;
 }
 
 #cerrar-comments {
@@ -63,12 +64,12 @@ background-color: #ffffff15;
 }
 
 
-#linea-msg{
-background-color: rgba(255, 255, 255, 0.178);
+#linea-msg {
+    background-color: rgba(255, 255, 255, 0.178);
 }
 
-#img img{
+#img img {
     object-fit: contain;
     max-height: 300px;
-    
+
 }

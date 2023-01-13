@@ -291,7 +291,10 @@ p {
 #apps {
     width: 100%;
     height: 100%;
-    color: #fff;
+    color: rgb(0, 0, 0);
+    border: 1px solid #000000;
+    background-color: rgba(255, 255, 255, 0.678);
+    border-radius: 5px;
 }
 
 #contain-menu {
@@ -543,77 +546,6 @@ p {
 #card-move:hover div {
 
     transform: translateY(-30px);
-}
-
-/* carde */
-
-#carde {
-    width: 190px;
-    height: 300px;
-    overflow: auto;
-    background: white;
-    padding: .4em;
-    border-radius: 6px;
-}
-
-#card-image {
-    background-color: rgb(236, 236, 236);
-    width: 100%;
-    height: 60%;
-    border-radius: 6px 6px 0 0;
-}
-
-#card-image img {
-    width: 96%;
-    height: 60%;
-    object-fit: cover;
-    transition: all .5s;
-
-}
-
-#card-image img:hover {
-    transform: translateY(-5px);
-    border-radius: 5px;
-    margin-right: 0;
-    margin-left: 0;
-}
-
-
-#category {
-    text-transform: uppercase;
-    font-size: 0.7em;
-    font-weight: 600;
-    color: rgb(63, 121, 230);
-    padding: 10px 7px 0;
-}
-
-#category:hover {
-    cursor: pointer;
-}
-
-#heading {
-    font-weight: 600;
-    color: rgb(88, 87, 87);
-    padding: 7px;
-}
-
-#heading:hover {
-    cursor: pointer;
-}
-
-#author {
-    color: gray;
-    font-weight: 400;
-    font-size: 11px;
-    padding-top: 20px;
-}
-
-#name {
-    font-weight: 600;
-}
-
-#name:hover {
-    cursor: pointer;
 }
 
 /* btn add image */
