@@ -109,13 +109,37 @@ exports.deletePhoto = async function (req, res, next) {
 exports.cargarDatos = async function (req, res, next) {
     const photos = await Photo.findAll({ include: User });
     const users = await User.findAll();
+
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - 1);
+
+    const randomSelections = users.map(user => getRandomSelection(photos, user.id, date));
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    console.log(photos);
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    console.log("-----------------------------------------------");
+    console.log(randomSelections);
+    console.log("-----------------------------------------------");
+
     const labels = await Label.findAll({ include: Photo });
-
-    /* const photoRankings = await Photorating.findAll({where:{}}); */
-
-    res.render("home", { photos: photos.reverse(), labels: labels, users: users, req: req })
+    res.render("home", { photos: randomSelections.reverse(), labels: labels, users: users, req: req })
 }
 
+
+const getRandomSelection = (photos, userId, date) => {
+    const userPhotos = photos.filter(p => p.idOwner == userId);
+    //todas las fotos menores a un año y del mismo usuario
+    const photosFromDate = userPhotos.filter(p => p.creationDate < date);
+
+    const randomSelection = {};
+    while (randomSelection.length < photosFromDate.length && randomSelection.length < 1) {
+        const randomIndex = Math.floor(Math.random() * photosFromDate.length);
+        if (!randomSelection.includes(photosFromDate[randomIndex])) {
+            randomSelection.push(photosFromDate[randomIndex]);
+        }
+    }
+    return randomSelection;
+}
 /* get /sort/:manera */
 exports.sortPhoto = async function (req, res, next) {
     let photos = await Photo.findAll({ include: User });
@@ -278,3 +302,4 @@ exports.ratingPhoto = async function (req, res) {
     res.redirect("/photo");
 
 }
+

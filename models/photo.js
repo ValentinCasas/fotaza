@@ -40,3 +40,5 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Photo;
 };
+
+
