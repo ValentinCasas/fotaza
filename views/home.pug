@@ -104,7 +104,10 @@ html
                     div(id="contain-card" class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4")
 
                         div( id="img-profile" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
-                            img(src=`${photo.User.profileImage}`)  
+                            if !req.session.isLoggedIn
+                                img(src=`/${photo.imageWatermarkFotaza}`)
+                            else
+                                img(src=`${photo.User.profileImage}`)  
 
                         div( id="category-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
                             i=photo.category    
