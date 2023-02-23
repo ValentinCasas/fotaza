@@ -107,39 +107,50 @@ exports.deletePhoto = async function (req, res, next) {
 
 /* get / */
 exports.cargarDatos = async function (req, res, next) {
-    const photos = await Photo.findAll({ include: User });
-    const users = await User.findAll();
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-    const date = new Date();
-    date.setFullYear(date.getFullYear() - 1);
+    // Utilizar la fecha para buscar registros en la base de datos
+    const PhotosAccordingToYear = await Photo.findAll({
+        where: {
+            creationDate: {
+                [Op.gt]: oneYearAgo
+            }
+        },
+        include: User
+    });
 
-    const randomSelections = users.map(user => getRandomSelection(photos, user.id, date));
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(photos);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log("-----------------------------------------------");
-    console.log(randomSelections);
-    console.log("-----------------------------------------------");
-
-    const labels = await Label.findAll({ include: Photo });
-    res.render("home", { photos: randomSelections.reverse(), labels: labels, users: users, req: req })
-}
-
-
-const getRandomSelection = (photos, userId, date) => {
-    const userPhotos = photos.filter(p => p.idOwner == userId);
-    //todas las fotos menores a un año y del mismo usuario
-    const photosFromDate = userPhotos.filter(p => p.creationDate < date);
-
-    const randomSelection = {};
-    while (randomSelection.length < photosFromDate.length && randomSelection.length < 1) {
-        const randomIndex = Math.floor(Math.random() * photosFromDate.length);
-        if (!randomSelection.includes(photosFromDate[randomIndex])) {
-            randomSelection.push(photosFromDate[randomIndex]);
+    // Agrupar las fotos por usuario
+    const photosByUser = PhotosAccordingToYear.reduce((acc, photo) => {
+        const userId = photo.User.id;
+        if (!acc[userId]) {
+            acc[userId] = [];
         }
-    }
-    return randomSelection;
+        acc[userId].push(photo);
+        return acc;
+    }, {});
+
+    // Seleccionar una foto aleatoria por cada usuario
+    const randomPhotos = Object.values(photosByUser).map((photos) => {
+        const randomIndex = Math.floor(Math.random() * photos.length);
+        return photos[randomIndex];
+    });
+
+    const users = await User.findAll();
+    const labels = await Label.findAll({ include: Photo });
+
+
+    const photos = await Photo.findAll();
+    const photosRating = photos.filter(photo => {
+        return photo.numberOfStars > 4;
+      });
+
+
+    res.render("home", { photos: randomPhotos.reverse(), labels: labels, users: users, req: req, photosRating: photosRating })
 }
+
+
+
 /* get /sort/:manera */
 exports.sortPhoto = async function (req, res, next) {
     let photos = await Photo.findAll({ include: User });
