@@ -107,6 +107,10 @@ exports.deletePhoto = async function (req, res, next) {
 
 /* get / */
 exports.cargarDatos = async function (req, res, next) {
+
+    const photos = await Photo.findAll();
+    const users = await User.findAll();
+    const labels = await Label.findAll({ include: Photo });
     const oneYearAgo = new Date();
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
@@ -136,15 +140,9 @@ exports.cargarDatos = async function (req, res, next) {
         return photos[randomIndex];
     });
 
-    const users = await User.findAll();
-    const labels = await Label.findAll({ include: Photo });
-
-
-    const photos = await Photo.findAll();
     const photosRating = photos.filter(photo => {
         return photo.numberOfStars > 4;
-      });
-
+    });
 
     res.render("home", { photos: randomPhotos.reverse(), labels: labels, users: users, req: req, photosRating: photosRating })
 }
@@ -295,13 +293,14 @@ exports.ratingPhoto = async function (req, res) {
         promedio += Math.floor(element.starNumber);
     });
 
-    console.log("aaaaaaaaaaa")
-    console.log(typeof (promedio))
-    console.log("aaaaaaaaaaa")
+    const tiempoTranscurrido = Date.now();
+    const fechaCreacion = new Date(tiempoTranscurrido);
+    fechaCreacion.toLocaleDateString()
 
     if (photoratings.length == 0) {
         Photorating.create({
             idPhoto: id,
+            creationDate: fechaCreacion,
             idUser: users[0].id,
             starNumber: numStar,
         });

@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   Photorating.init({
     idPhoto: DataTypes.INTEGER,
     idUser: DataTypes.INTEGER,
-    starNumber: DataTypes.INTEGER
+    starNumber: DataTypes.INTEGER,
+    creationDate: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'Photorating',
