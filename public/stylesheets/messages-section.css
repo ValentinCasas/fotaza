@@ -9,7 +9,7 @@
     transition: .5s;
     letter-spacing: 4px;
     border-radius: 2em;
-
+    outline: none;
     background: linear-gradient(145deg, #cacaca88, #4825808a);
     background-color: rgb(250, 255, 255);
 }
@@ -42,7 +42,7 @@
     color: #cfcece;
 }
 
-i{
+i {
     color: rgb(102, 95, 109);
     margin-left: 3px;
 }

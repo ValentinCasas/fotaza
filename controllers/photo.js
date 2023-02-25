@@ -50,11 +50,15 @@ exports.buscarPhotos = async function (req, res) {
     }
 
     // Combinar resultados y eliminar duplicados
-    const photos = [...photosByTitle, ...photosByLabel];
+    let photos = [...photosByTitle, ...photosByLabel];
     const photosWithoutDuplicates = removeDuplicates(photos);
 
+    photos = await Photo.findAll({include:User});
+    const photosRating = photos.filter(photo => {
+        return photo.numberOfStars > 4;
+    });
 
-    res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req });
+    res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req, photosRating:photosRating });
 };
 
 /* get /delete/:id */
@@ -151,11 +155,15 @@ exports.cargarDatos = async function (req, res, next) {
 
 /* get /sort/:manera */
 exports.sortPhoto = async function (req, res, next) {
-    let photos = await Photo.findAll({ include: User });
+    let photos = await Photo.findAll({include: User});
     const users = await User.findAll();
     const labels = await Label.findAll({ include: Photo });
-    let manera = req.params.manera;
 
+    const photosRating = photos.filter(photo => {
+        return photo.numberOfStars > 4;
+    });
+
+    let manera = req.params.manera;
 
     switch (manera) {
         case 'fecha':
@@ -183,9 +191,7 @@ exports.sortPhoto = async function (req, res, next) {
             break;
     }
 
-
-
-    res.render("home", { photos: photos, labels: labels, users: users, req: req })
+    res.render("home", { photos: photos, labels: labels, users: users, req: req, photosRating: photosRating })
 }
 
 /* get '/target-top/:id' */

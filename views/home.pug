@@ -22,12 +22,16 @@ html
 
 
         nav( id="nav-bar")
-            div( class="col-lg-10 col-md-10 col-sm-10 col-xs-10")
+            div( class="col-lg-8 col-md-10 col-sm-6 col-xs-6")
                 a(id="fotaza" href="/photo") 
                     h1( id="fotaza") Fotaza
-            div(id="contain-profile-icon" class="col-lg-2 col-md-2 col-sm-2 col-xs-2")
-                a(href="/user/profile")
-                    ion-icon(name="person-circle-sharp" id="profile-icon")                
+            div(id="contain-profile-icons" class="col-lg-4 col-md-6 col-sm-6 col-xs-6")
+                div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
+                    a(href="/user/profile")
+                        ion-icon(name="person-circle-sharp" id="profile-icon")     
+                div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
+                    a(href="/user/profile")
+                        ion-icon(name="person-circle-sharp" id="profile-icon")                                 
 
         div(id="top-photos")
             each photo in photosRating
@@ -36,10 +40,11 @@ html
                         img(src=`/${photo.image}`)
 
 
-        a(id="cerrar" onclick="cerrar()" )
-            ion-icon(name="close" id="close")
 
         div(id="contain-menu")
+            div(id="cuadro-menu")
+                a(id="cerrar" onclick="cerrar()" )
+                    ion-icon(name="close" id="close")
             div(id="cuadro-menu")
                 a(href="/photo/sort/fecha")
                     button(id="contact-btn") fecha de creacion  
@@ -54,16 +59,18 @@ html
                     button(id="contact-btn") privadas             
 
 
-        div(id="contain-menu-share" )
+        div(id="contain-menu-share" ) 
+            a(id="cerrar" onclick="cerrar()"  )
+                ion-icon(name="close" id="close")
             form( action="/message/share" method="post" id="cuadro-menu")
                 input(type="hidden" name="idPhoto" id="papa" value="")   
                 label Mensaje 
-                input(type="text" name="msg" class="form-control") 
+                input( type="text" name="msg" class="form-control") 
                 label Destino
                 select(class="form-control" name="idReceptor")
                     each user in users
                         option(value=`${user.id}`) #{user.name}
-                button(id="contact-btn") compartir  
+                button(id="contact-btn" class="my-4") compartir  
 
 
         div(id="box-padre" class="row justify-content-center mx-2 my-5 px-3 col-lg-12 col-md-12 col-sm-12 col-xs-12")
@@ -85,7 +92,7 @@ html
                             a(id="button_top" href="/message/view/myOffers" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Mis ofertas                               
 
 
-            div( id="box-cards" class="border border-dark  col-lg-8 col-md-12 col-sm-12 col-xs-12 my-2 p-4 ")
+            div( id="box-cards" class="col-lg-8 col-md-12 col-sm-12 col-xs-12 my-2 p-4 ")
 
                 div( id="box-buscar" class="row justify-content-center col-lg-10 col-md-10 col-sm-10 col-xs-10 ")
                     form(action="/photo/buscar" method="post" class="row justify-content-center  col-lg-12 col-md-12 col-sm-12 col-xs-12")
@@ -104,13 +111,10 @@ html
                     div(id="contain-card" class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4")
 
                         div( id="img-profile" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
-                            if !req.session.isLoggedIn
-                                img(src=`/${photo.imageWatermarkFotaza}`)
-                            else
-                                img(src=`${photo.User.profileImage}`)  
+                            img(src=`/${photo.User.profileImage}`)  
 
                         div( id="category-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
-                            i=photo.category    
+                            i #{photo.User.name+" "+photo.User.surname}   
 
                         div( class=" my-2 mx-0 row justify-content-center  col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ")
                             div(id="photo-card")
@@ -122,7 +126,7 @@ html
                                     img(src=`/${photo.image}`)
 
                         div( id="name-card" class="col-lg-8  col-md-8  col-sm-8 col-xs-12")
-                            i name: #{photo.User.name+" "+photo.User.surname} 
+                            i=photo.category
 
                         div( id="date-card" class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 ")
                             i=photo.creationDate

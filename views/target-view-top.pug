@@ -22,10 +22,11 @@ html(lang="es")
 
         a(id="menu" onclick="abrirMenu()")
             ion-icon(name="list" id="apps")
-        a(id="cerrar" onclick="cerrar()" )
-            ion-icon(name="close" id="close")
 
         div(id="contain-menu")
+            div(id="cuadro-menu")
+                a(id="cerrar" onclick="cerrar()" )
+                    ion-icon(name="close" id="close")
             div(id="cuadro-menu")
                 button(id="contact-btn") Contactarse
             div(id="cuadro-menu")
