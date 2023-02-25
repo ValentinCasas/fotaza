@@ -27,18 +27,18 @@ html
                     h1( id="fotaza") Fotaza
             div(id="contain-profile-icons" class="col-lg-4 col-md-6 col-sm-6 col-xs-6")
                 div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
-                    a(href="/user/profile")
-                        ion-icon(name="person-circle-sharp" id="profile-icon")     
+                    a(href="/auth/logout")
+                        ion-icon(name="power-sharp" id="profile-icon")     
                 div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
                     a(href="/user/profile")
-                        ion-icon(name="person-circle-sharp" id="profile-icon")                                 
+                        ion-icon(name="person-circle-sharp" id="profile-icon")     
+
 
         div(id="top-photos")
             each photo in photosRating
                 div(id="top-img")
                     a(href=`/photo/target-top/${photo.id}` id="top-target")
                         img(src=`/${photo.image}`)
-
 
 
         div(id="contain-menu")
@@ -71,6 +71,7 @@ html
                     each user in users
                         option(value=`${user.id}`) #{user.name}
                 button(id="contact-btn" class="my-4") compartir  
+
 
         div(id="box-padre" class="row justify-content-center mx-2 my-5 px-3 col-lg-12 col-md-12 col-sm-12 col-xs-12")
 
