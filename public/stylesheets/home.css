@@ -43,7 +43,7 @@ body::-webkit-scrollbar,
     transition: 1s ease all;
 }
 
-#box-cards:hover::-webkit-scrollbar {
+#box-cards:hover::-webkit-scrollbar, #top-photos:hover::-webkit-scrollbar {
     display: block;
 }
 
@@ -175,8 +175,8 @@ body::-webkit-scrollbar-thumb,
     padding: 5px;
     border: 1px solid rgba(99, 93, 93, 0.904);
     height: 50px;
-    border-radius: 20px 0 0 20px;
-    transition: 1s ease all;
+    border-radius: 2rem;
+    transition: .5s ease all;
     background-color: #f8f8f8;
 }
 
@@ -184,8 +184,8 @@ body::-webkit-scrollbar-thumb,
     padding: 5px;
     border: 1px solid black;
     height: auto;
-    border-radius: 10px;
-    background: #5256ad;
+    border-radius: 0;
+    background: #6e72b3c4;
 }
 
 #options[open] > summary{

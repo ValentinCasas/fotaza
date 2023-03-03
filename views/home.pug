@@ -21,103 +21,104 @@ html
     body
 
 
-        nav( id="nav-bar")
-            div( class="col-lg-8 col-md-10 col-sm-6 col-xs-6")
-                a(id="fotaza" href="/photo") 
-                    h1( id="fotaza") Fotaza
-            div(id="contain-profile-icons" class="col-lg-4 col-md-6 col-sm-6 col-xs-6")
-                div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
+        nav#nav-bar
+            .col-lg-8.col-md-10.col-sm-6.col-xs-6
+                a#fotaza(href="/photo")
+                    h1#fotaza Fotaza
+            .col-lg-4.col-md-6.col-sm-6.col-xs-6#contain-profile-icons
+                .col-lg-6.col-md-6.col-sm-6.col-xs-6#contain-profile-icon
                     a(href="/auth/logout")
-                        ion-icon(name="power-sharp" id="profile-icon")     
-                div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
+                        ion-icon#profile-icon(name="power-sharp")
+                .col-lg-6.col-md-6.col-sm-6.col-xs-6#contain-profile-icon
                     a(href="/user/profile")
-                        ion-icon(name="person-circle-sharp" id="profile-icon")     
+                        ion-icon#profile-icon(name="person-circle-sharp")    
 
 
-        div(id="top-photos")
+        #top-photos
             each photo in photosRating
-                div(id="top-img")
-                    a(href=`/photo/target-top/${photo.id}` id="top-target")
-                        img(src=`/${photo.image}`)
+                #top-img
+                    a#top-target(href=`/photo/target-top/${photo.id}`)
+                        img(src=`/${photo.image}`) 
 
-
-        div(id="contain-menu")
-            div(id="cuadro-menu")
-                a(id="cerrar" onclick="cerrar()" )
+        //menu para ordenar imagenes
+        #contain-menu
+            #cuadro-menu
+                a#cerrar(onclick="cerrar()")
                     ion-icon(name="close" id="close")
-            div(id="cuadro-menu")
+            #cuadro-menu
                 a(href="/photo/sort/fecha")
-                    button(id="contact-btn") fecha de creacion  
-            div(id="cuadro-menu")
+                    button#contact-btn Fecha de creación
+            #cuadro-menu
                 a(href="/photo/sort/public")
-                    button(id="contact-btn") publicas
-            div(id="cuadro-menu")
+                    button#contact-btn Publicas
+            #cuadro-menu
                 a(href="/photo/sort/protected")
-                    button(id="contact-btn") protegidas      
-            div(id="cuadro-menu")
+                    button#contact-btn Protegidas
+            #cuadro-menu
                 a(href="/photo/sort/private")
-                    button(id="contact-btn") privadas             
+                    button#contact-btn Privadas
 
-
-        div(id="contain-menu-share" ) 
-            a(id="cerrar" onclick="cerrar()"  )
-                ion-icon(name="close" id="close")
-            form( action="/message/share" method="post" id="cuadro-menu")
-                input(type="hidden" name="idPhoto" id="papa" value="")   
-                label Mensaje 
-                input( type="text" name="msg" class="form-control") 
-                label Destino
-                select(class="form-control" name="idReceptor")
+        //menu para comparir imagenes
+        div#contain-menu-share
+            a#cerrar(onclick="cerrar()")
+                ion-icon#close(name="close")
+            form#cuadro-menu(action="/message/share" method="post")
+                input(type="hidden" name="idPhoto" id="papa" value="")
+                label(for="msg") Mensaje
+                input#msg.form-control(type="text" name="msg")
+                label(for="idReceptor") Destino
+                select#idReceptor.form-control(name="idReceptor")
                     each user in users
-                        option(value=`${user.id}`) #{user.name}
-                button(id="contact-btn" class="my-4") compartir  
+                        option(value=user.id)= user.name
+                button#contact-btn.my-4(class="btn btn-primary" type="submit") compartir
 
+        //caja donde estan todas las imagenes
+        div#box-padre.row.justify-content-center.mx-2.my-5.px-3.col-lg-12.col-md-12.col-sm-12.col-xs-12
 
-        div(id="box-padre" class="row justify-content-center mx-2 my-5 px-3 col-lg-12 col-md-12 col-sm-12 col-xs-12")
-
-            details(id="options" class="row col-lg-3 col-md-12 col-sm-12 col-xs-12 my-4 mx-4 p-4")
+            details#options.row.col-lg-3.col-md-12.col-sm-12.col-xs-12.my-4.mx-4.p-4
                 summary  OPCIONES
-                div( id="buttons-card" class="justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4")        
-                    div(class="row")
-                        button(id="btn")
-                            a(id="button_top" href="/photo/view/almacenar" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Almacenar
-                    div(class="row")
-                        button(id="btn")
-                            a(id="button_top" onclick="abrirMenu()" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Ordenar   
-                    div(class="row")
-                        button(id="btn")
-                            a(id="button_top" href="/message/view/myMessages" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Mis mensajes 
-                    div(class="row")
-                        button(id="btn")
-                            a(id="button_top" href="/message/view/myOffers" class="col-lg-12 col-md-12 col-sm-12 col-xs-12") Mis ofertas                               
+                div#buttons-card.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2.p-4
+                    div.row
+                        button#btn
+                            a#button_top.col-lg-12.col-md-12.col-sm-12.col-xs-12(href="/photo/view/almacenar") Almacenar
+                    div.row
+                        button#btn
+                            a#button_top.col-lg-12.col-md-12.col-sm-12.col-xs-12(onclick="abrirMenu()") Ordenar
+                    div.row
+                        button#btn
+                            a#button_top.col-lg-12.col-md-12.col-sm-12.col-xs-12(href="/message/view/myMessages") Mis mensajes
+                    div.row
+                        button#btn
+                            a#button_top.col-lg-12.col-md-12.col-sm-12.col-xs-12(href="/message/view/myOffers") Mis ofertas
 
+            div#box-cards.col-lg-8.col-md-12.col-sm-12.col-xs-12.my-2.p-4
+                div#box-buscar.row.justify-content-center.col-lg-10.col-md-10.col-sm-10.col-xs-10
+                    form(action="/photo/buscar" method="post").row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        input#buscar.col-lg-6.col-md-8.col-sm-8.col-xs-8(name="buscar" placeholder="[ ...")
+                        button#buscar.col-md-4.col-sm-4.col-xs-4.buscar Buscar
 
-            div( id="box-cards" class="col-lg-8 col-md-12 col-sm-12 col-xs-12 my-2 p-4 ")
-
-                div( id="box-buscar" class="row justify-content-center col-lg-10 col-md-10 col-sm-10 col-xs-10 ")
-                    form(action="/photo/buscar" method="post" class="row justify-content-center  col-lg-12 col-md-12 col-sm-12 col-xs-12")
-                        input( id="buscar" name="buscar" placeholder="[ ..." class="col-lg-6 col-md-8 col-sm-8 col-xs-8")
-                        button(id="buscar" class="col-md-4 col-sm-4 col-xs-4") buscar 
-
-                div( id="box-add" class="row justify-content-end col-lg-2 col-md-2 col-sm-2 col-xs-2 ")
-                    div( class="col-lg-12 col-md-12 col-sm-12 col-xs-12")
-                        button(class="icon-btn add-btn")
-                            div(class="add-icon")
-                            div(class="btn-txt") 
+                div#box-add.row.justify-content-end.col-lg-2.col-md-2.col-sm-2.col-xs-2
+                    div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        button.icon-btn.add-btn
+                            div.add-icon
+                            div.btn-txt
                                 a(href="/photo/view/almacenar" style="text-decoration:none; color:black;") Add Photo
 
                 each photo in photos
 
-                    div(id="contain-card" class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2 p-4")
+                    div#contain-card.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2.p-4
+                        // Imagen de perfil del usuario que publicó la foto
+                        div#img-profile.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-0
+                            img(src=`/${photo.User.profileImage}`)
 
-                        div( id="img-profile" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
-                            img(src=`/${photo.User.profileImage}`)  
+                        // Nombre del usuario que publicó la foto
+                        div#category-card.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-0
+                            i #{photo.User.name + " " + photo.User.surname}
 
-                        div( id="category-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-0")
-                            i #{photo.User.name+" "+photo.User.surname}   
-
-                        div( class=" my-2 mx-0 row justify-content-center  col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ")
-                            div(id="photo-card")
+                        // Contenedor de la foto y su información
+                        div.row.justify-content-center.my-2.mx-0.col-lg-12.col-md-12.col-sm-12.col-xs-12.p-0
+                            div#photo-card
+                                // Mostrar la imagen de la foto dependiendo de su privacidad y si el usuario ha iniciado sesión
                                 if photo.privacy == "private"
                                     img(src=`/${photo.imageWatermark}`)
                                 else if photo.privacy == "public" && !req.session.isLoggedIn
@@ -125,28 +126,33 @@ html
                                 else if photo.privacy != "private" && req.session.isLoggedIn
                                     img(src=`/${photo.image}`)
 
-                        div( id="name-card" class="col-lg-8  col-md-8  col-sm-8 col-xs-12")
+                        // Categoría de la foto
+                        div#name-card.col-lg-8.col-md-8.col-sm-8.col-xs-12
                             i=photo.category
 
-                        div( id="date-card" class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 ")
+                        // Fecha de creación de la foto
+                        div#date-card.col-lg-4.col-md-4.col-sm-4.col-xs-4
                             i=photo.creationDate
 
-                        div( id="stars-card" class=" col-lg-12  col-md-12  col-sm-12 col-xs-12 ")
-                            div(class="ec-stars-wrapper")
+                        // Sección para valorar la foto con estrellas
+                        div#stars-card.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                            div.ec-stars-wrapper
                                 a(href=`/photo/rating/${photo.id}/1` data-value="1" title="Votar con 1 estrellas") ★
                                 a(href=`/photo/rating/${photo.id}/2` data-value="2" title="Votar con 2 estrellas") ★
                                 a(href=`/photo/rating/${photo.id}/3` data-value="3" title="Votar con 3 estrellas") ★
                                 a(href=`/photo/rating/${photo.id}/4` data-value="4" title="Votar con 4 estrellas") ★
                                 a(href=`/photo/rating/${photo.id}/5` data-value="5" title="Votar con 5 estrellas") ★
 
-                        div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12")
+                        // Promedio de valoración de la foto
+                        div#feedback-card.col-lg-12.col-md-12.col-sm-12.col-xs-12
                             p Promedio valoracion:
                                 i #{photo.numberOfStars}
 
-                        div( id="feedback-card" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-2")
+                        // Etiquetas de la foto
+                        div#feedback-card.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2
                             details
                                 summary Etiquetas
-                                each label in labels 
+                                each label in labels
                                     if label.idPhoto == photo.id
                                         p=label.keyword
 
@@ -167,18 +173,18 @@ html
                                             path(fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z")
                                 span Share 
 
+        //decoracion sin sentido
+        div#datos.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.py-5
 
-        div( id="datos" class="row justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12  py-5")      
+            div#footer.row.justify-content-center.col-lg-11.col-md-11.col-sm-11.col-xs-11.my-5.p-5
 
-            div( id="footer" class="row justify-content-center col-lg-11 col-md-11 col-sm-11 col-xs-11 my-5 p-5") 
+                div#card-move.col-lg-11.col-md-11.col-sm-11.col-xs-12.my-5
+                    div
+                div#card.col-lg-3.col-md-11.col-sm-11.col-xs-4.m-5
+                div#card.col-lg-3.col-md-11.col-sm-11.col-xs-4.m-5
+                div#card.col-lg-3.col-md-11.col-sm-11.col-xs-4.m-5
 
-                div(id="card-move" class="col-lg-11 col-md-11 col-sm-11 col-xs-12 my-5")
-                    div 
-                div(id="card" class="col-lg-3 col-md-11 col-sm-11 col-xs-4 m-5")
-                div(id="card" class="col-lg-3 col-md-11 col-sm-11 col-xs-4 m-5")
-                div(id="card" class="col-lg-3 col-md-11 col-sm-11 col-xs-4 m-5")
-
-
+        //carrousel de imagenes importantes
         .slider
             .slider-images
             button.slider-prev 

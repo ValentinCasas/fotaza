@@ -5,9 +5,10 @@ const uuid = require("uuid");
 
 /* post '/singIn' */
 exports.login = async function (req, res, next) {
-    let { mail, password } = req.body;
 
+    let { mail, password } = req.body;
     let = sessionId = req.sessionID;
+    
     await User.update({ sessionId: sessionId }, { where: { email: mail } });
 
     const user = await User.findAll({ where: { email: mail } });
@@ -26,12 +27,10 @@ exports.login = async function (req, res, next) {
     }
 };
 
-
 exports.cerrarSesion = function (req, res, next) {
     req.session.destroy();
     res.redirect("/");
 }
-
 
 /* post '/register' */
 exports.register = async function (req, res) {
@@ -69,7 +68,6 @@ exports.register = async function (req, res) {
         })
 
 };
-
 
 /* post '/view/register' */
 exports.viewRegister = function (req, res) {

@@ -29,7 +29,7 @@ html
             each photo in photos 
 
                 div(id="card-img" class="row justify-content-center col-lg-3 col-md-10 col-sm-10 col-xs-10 my-2 mx-5") 
-                    i=photo.category    
+                    i.my-4 #{photo.category}    
                     img(src=`/${photo.image}`)
 
                     i=photo.creationDate 
