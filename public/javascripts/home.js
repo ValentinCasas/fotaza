@@ -31,46 +31,77 @@ const slider = document.querySelector('.slider');
 const sliderImages = document.querySelector('.slider-images');
 const prevButton = document.querySelector('.slider-prev');
 const nextButton = document.querySelector('.slider-next');
+const indicatorsContainer = document.querySelector('.slider-indicators');
 
 const images = [
-    '/910923.png',
-
-    '/template.png'
+  '/910923.png',
+  '/template.png',
 ];
 
 let currentIndex = 0;
 
 const addImage = (image) => {
-    const imgElement = document.createElement('img');
-    imgElement.src = image;
-    sliderImages.appendChild(imgElement);
+  const imgElement = document.createElement('img');
+  imgElement.src = image;
+  sliderImages.appendChild(imgElement);
+};
+
+const addIndicator = (index) => {
+  const indicator = document.createElement('span');
+  indicator.classList.add('dot');
+  if (index === currentIndex) {
+    indicator.classList.add('active');
+  }
+  indicator.addEventListener('click', () => {
+    currentIndex = index;
+    showImage(currentIndex);
+  });
+  indicatorsContainer.appendChild(indicator);
 };
 
 const clearImages = () => {
-    while (sliderImages.firstChild) {
-        sliderImages.removeChild(sliderImages.firstChild);
-    }
+  while (sliderImages.firstChild) {
+    sliderImages.removeChild(sliderImages.firstChild);
+  }
+};
+
+const clearIndicators = () => {
+  while (indicatorsContainer.firstChild) {
+    indicatorsContainer.removeChild(indicatorsContainer.firstChild);
+  }
+};
+
+const showImage = (index) => {
+  clearImages();
+  addImage(images[index]);
+  clearIndicators();
+  for (let i = 0; i < images.length; i++) {
+    addIndicator(i);
+  }
+  const indicators = document.querySelectorAll('.dot');
+  indicators[currentIndex].classList.add('active');
 };
 
 const showPrevImage = () => {
-    currentIndex--;
-    if (currentIndex < 0) {
-        currentIndex = images.length - 1;
-    }
-    clearImages();
-    addImage(images[currentIndex]);
+  currentIndex--;
+  if (currentIndex < 0) {
+    currentIndex = images.length - 1;
+  }
+  showImage(currentIndex);
 };
 
 const showNextImage = () => {
-    currentIndex++;
-    if (currentIndex >= images.length) {
-        currentIndex = 0;
-    }
-    clearImages();
-    addImage(images[currentIndex]);
+  currentIndex++;
+  if (currentIndex >= images.length) {
+    currentIndex = 0;
+  }
+  showImage(currentIndex);
 };
 
 prevButton.addEventListener('click', showPrevImage);
 nextButton.addEventListener('click', showNextImage);
 
-addImage(images[currentIndex]);
+showImage(currentIndex);
+
+
+

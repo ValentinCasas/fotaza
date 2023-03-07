@@ -2,46 +2,45 @@ extends layout
 
 block content
 
-  div(class="m-1 row ")
+  div.row.m-1
 
-    div(class="col-lg-7 col-md-6 col-sm-5 col-xs-12 my-5")
-      h1(id="fotaza" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-4") Fotaza
+    div.col-lg-7.col-md-6.col-sm-5.col-xs-12.my-5
+      h1.col-lg-12.col-md-12.col-sm-12.col-xs-12.mx-4#fotaza Fotaza
 
-      h1(id="prueba" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-4 my-2") Esto es Una Prueba
+      h1.col-lg-12.col-md-12.col-sm-12.col-xs-12.mx-4.my-2#prueba Esto es Una Prueba
 
-      h4(id="encabezado" class="col-lg-6 col-md-12 col-sm-10 col-xs-12 d-none d-sm-block mx-4 my-0 ") Lorem ipsum dolor sit amet  consectetur adipisicing elit. Ab natus molestias saepe consequatur
+      h4.col-lg-6.col-md-12.col-sm-10.col-xs-12.mx-4.my-0.d-none.d-sm-block#encabezado Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab natus molestias saepe consequatur.
 
-      div(class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-4 my-5")
-        button(class="cssbuttons-io-button") Get started   
-          div(class="icon")
-            a(href="unauthenticated/fotaza" )          
-              svg(height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg")
-                path( d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor")
+      div.col-lg-12.col-md-12.col-sm-12.col-xs-12.mx-4.my-5
+        button.cssbuttons-io-button(type="button")
+          | Get started
+          div.icon
+            a(href="unauthenticated/fotaza")
+              svg(width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg")
+                path(fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z")
 
-
-
-    div(class="col-lg-5 col-md-6 col-sm-7 col-xs-12 my-5")
-      div(class="login-box col-lg-11 col-md-12 col-sm-12 col-xs-12 my-3")
-        h2(class="my-4") Login
+    div.col-lg-5.col-md-6.col-sm-7.col-xs-12.my-5
+      div.login-box.col-lg-11.col-md-12.col-sm-12.col-xs-12.my-3
+        h2.my-4 Login
 
         form(action="auth/singIn" method="post")
-          div(class="user-box my-5")
-            input(type="mail" name="mail" required="")
+          div.user-box.my-5
+            input(type="email" name="mail" required)
             label Mail  
 
-          div(class="user-box my-4")
-            input(type="password" name="password" required="")
+          div.user-box.my-4
+            input(type="password" name="password" required)
             label Password
 
-          div(class="m-0 row justify-content-center")
-            i(style="color:rgb(139, 134, 209)" class="devicon-facebook-plain mx-4")
-            i(style="color:rgb(139, 134, 209)" class="devicon-github-original mx-2")
-            i(style="color:rgb(139, 134, 209)" class="devicon-twitter-original mx-4")
+          div.row.justify-content-center.m-0
+            i.devicon-facebook-plain.mx-4(style="color:rgb(139, 134, 209)")
+            i.devicon-github-original.mx-2(style="color:rgb(139, 134, 209)")
+            i.devicon-twitter-original.mx-4(style="color:rgb(139, 134, 209)")
 
-          div(id="contain-login-singUp" class="my-5")
-            a(href="/auth/view/register" id="login-singUp")  Sing up
+          div#contain-login-singUp.my-5
+            a#login-singUp(href="/auth/view/register") Sing up
 
+          button#submit-login(type="submit") Submit
 
-          button(id="submit-login") Submit
 
 

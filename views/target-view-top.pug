@@ -20,27 +20,28 @@ html(lang="es")
     body 
 
 
-        a(id="menu" onclick="abrirMenu()")
-            ion-icon(name="list" id="apps")
+        a#menu(onclick="abrirMenu()")
+            ion-icon#apps(name="list")
 
-        div(id="contain-menu")
-            div(id="cuadro-menu")
-                a(id="cerrar" onclick="cerrar()" )
-                    ion-icon(name="close" id="close")
-            div(id="cuadro-menu")
-                button(id="contact-btn") Contactarse
-            div(id="cuadro-menu")
-                button(id="contact-btn") Enviar mensaje
-            div(id="cuadro-menu")
-                button(id="contact-btn") Comprar
-            div(id="cuadro-menu")
-                button(id="contact-btn") Detalles        
-            div(id="cuadro-menu")
+        #contain-menu
+            #cuadro-menu
+                a#cerrar(onclick="cerrar()")
+                    ion-icon#close(name="close")
+            #cuadro-menu
+                button#contact-btn Contactarse
+            #cuadro-menu
+                button#contact-btn Enviar mensaje
+            #cuadro-menu
+                button#contact-btn Comprar
+            #cuadro-menu
+                button#contact-btn Detalles
+            #cuadro-menu
                 a(href="/photo")
-                    button(id="contact-btn") Salir  
+                    button#contact-btn Salir
 
-        div(id="top-target-box" class="row")
-            div(id="top-target-img" class="col-lg-12 col-md-12 col-sm-12 col-xs-12")
+        #top-target-box.row
+            #top-target-img.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 img(src=`/${photos[0].image}`)
+
 
 

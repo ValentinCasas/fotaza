@@ -16,82 +16,71 @@ html
 
     body
 
-        nav( id="nav-bar")
-            div( class="col-lg-8 col-md-10 col-sm-6 col-xs-6")
-                a(id="fotaza" href="/photo") 
-                    h1( id="fotaza") Fotaza
-            div(id="contain-profile-icons" class="col-lg-4 col-md-6 col-sm-6 col-xs-6")
-                div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
+        nav#nav-bar
+            div.col-lg-8.col-md-10.col-sm-6.col-xs-6
+                a#fotaza(href="/photo")
+                    h1#fotaza Fotaza
+            div#contain-profile-icons.col-lg-4.col-md-6.col-sm-6.col-xs-6
+                div#contain-profile-icon.col-lg-6.col-md-6.col-sm-6.col-xs-6
                     a(href="/auth/logout")
-                        ion-icon(name="power-sharp" id="profile-icon")     
-                div(id="contain-profile-icon" class="col-lg-6 col-md-6 col-sm-6 col-xs-6")
+                        ion-icon#profile-icon(name="power-sharp")
+                div#contain-profile-icon.col-lg-6.col-md-6.col-sm-6.col-xs-6
                     a(href="/user/profile")
-                        ion-icon(name="person-circle-sharp" id="profile-icon")          
+                        ion-icon#profile-icon(name="person-circle-sharp")
 
-        div( id="almacenar" class="row justify-content-center col-lg-10 col-md-8 col-sm-12 col-xs-12 my-5  p-4")
 
-            form( action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data' class="row justify-content-center col-lg-11 col-md-11 col-sm-11 col-xs-11 mx-2" )
-
-                div( class="data-photo-box my-5")
-                    input( type="text" name="title" required="")
+        div#almacenar.row.justify-content-center.col-lg-10.col-md-8.col-sm-12.col-xs-12.my-5.p-4
+            form.row.justify-content-center.col-lg-11.col-md-11.col-sm-11.col-xs-11.mx-2(action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data')
+                div.data-photo-box.my-5
+                    input(type="text" name="title" required="")
                     label Titulo
-
-
-                label(  class=" col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") Privacidad
-                select( name="privacy" id="privacy" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control  p-2")
-                    option( value="protected") PROTEGIDA
-                    option( value="public") PUBLICA
-
-
-                label( class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") Categoria
-                select( name="category" id="category" class=" col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control p-2")
-                    option( value="publicitaria") Publicitaria
-                    option( value="artistica") Artistica
-                    option( value="periodistico") Periodistico
-                    option( value="paisajes") Paisajes
-                    option( value="retrato") Retrato
-                    option( value="area") Area
-                    option( value="accion") Accion
-                    option( value="movimiento") Movimiento
-
-                label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2 ") Derechos de uso
-                select(name="rightOfUse" id="category" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control  p-2")
+                label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 Privacidad
+                select#privacy.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.p-2(name="privacy")
+                    option(value="protected") PROTEGIDA
+                    option(value="public") PUBLICA
+                label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 Categoria
+                select#category.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.p-2(name="category")
+                    option(value="publicitaria") Publicitaria
+                    option(value="artistica") Artistica
+                    option(value="periodistico") Periodistico
+                    option(value="paisajes") Paisajes
+                    option(value="retrato") Retrato
+                    option(value="area") Area
+                    option(value="accion") Accion
+                    option(value="movimiento") Movimiento
+                label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 Derechos de uso
+                select#rightOfUse.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.p-2(name="rightOfUse")
                     option(value="Copyright") Copyright
                     option(value="Copyleft") Copyleft
                     option(value="Public Domain") Public Domain
                     option(value="Creative Commons") Creative Commons
-                label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 p-2 ") Imagen
-                input(type="file" name="imagen" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control btn-primary p-1"
-                    accept="image/jpeg,image/jpg,image/png" required="")
-
-                label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 my-2 p-2 ") Marca de agua:
-                    details(class="text-white")  
-                        summary 
-                            ion-icon(name="list-outline" style="font-size: 32px")
-                            i(style="font-size: 10px") click me
-
-                        p(class="my-4") - Si su imagen va a tener como derecho de autor Copyright, debera subir una imagen.
-                        p(class="my-4") - En el caso que este usando Copyright y no seleccione una foto, se tomara una imagen elegida por fotaza como marca de agua.
-                        p(class="my-4") - En el caso de que suba una imagen y no este utilizando Copyright, entonces no se tomara en cuenta. 
-                        input(type="file" name="watermark" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 form-control btn-info p-1"
-                            accept="image/jpeg,image/jpg,image/png")    
-
-                div( class="data-photo-box my-5 ")
-                    input( type="text" name="label1" required="")
-                    label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") etiqueta 1
-                div( class="data-photo-box my-5 mx-2")
-                    input( type="text" name="label2" required="")
-                    label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-1 p-2") etiqueta 2
-                div( class="data-photo-box my-5")
-                    input( type="text" name="label3" required="")
-                    label(class="col-lg-11 col-md-11 col-sm-11 col-xs-11 p-2") etiqueta 3
+                label.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2 Imagen
+                input.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.btn-primary.p-1(type="file" name="imagen" accept="image/jpeg,image/jpg,image/png" required="")
+                
+                label.col-lg-11.col-md-11.col-sm-11.col-xs-11.my-2.p-2 Info marca de agua:
+                details.text-white.col-lg-11.col-md-11.col-sm-11.col-xs-11.my-2.p-2
+                    summary
+                        ion-icon(name="list-outline" style="font-size: 32px")
+                        i(style="font-size: 10px") click me
+                    p.my-4 - Si su imagen va a tener como derecho de autor Copyright, debera subir una imagen.
+                    p.my-4 - En el caso que este usando Copyright y no seleccione una foto, se tomara una imagen elegida por fotaza como marca de agua.
+                    p.my-4 - En el caso de que suba una imagen y no este utilizando Copyright, entonces no se tomara en cuenta.
+                    input.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.btn-info.p-1(type="file" name="watermark" accept="image/jpeg,image/jpg,image/png")
+                
+                div.data-photo-box.my-5
+                    input(type="text" name="label1" required="")
+                    label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 etiqueta 1
+                div.data-photo-box.my-5.mx-2
+                    input(type="text" name="label2" required)
+                    label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 etiqueta 2
+                div.data-photo-box.my-5
+                    input(type="text" name="label3" required)
+                    label.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2 etiqueta 3
+                button#submitPhoto.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-4.p-4(type="submit") Subir
 
 
-
-                button(id="submitPhoto" class="col-lg-11 col-md-11 col-sm-11 col-xs-11 m-4 p-4") Subir
-
-        div(class="row justify-content-center  col-lg-2 col-md-4 my-5")
-            img(src="/like.png"  height="400px" style="z-index:-10;")
+        div.row.justify-content-center.col-lg-2.col-md-4.my-5
+            img(src="/like.png" height="400px" style="z-index:-10;")
 
 
 
