@@ -50,63 +50,46 @@ exports.buscarPhotos = async function (req, res) {
     }
 
     // Combinar resultados y eliminar duplicados
-    let photos = [...photosByTitle, ...photosByLabel];
-    const photosWithoutDuplicates = removeDuplicates(photos);
+    let photoss = [...photosByTitle, ...photosByLabel];
+    const photosWithoutDuplicates = removeDuplicates(photoss);
 
+    /* zona donde consigo photosRating */
+    let array = new Set();
+    let photoratings = await Photorating.findAll({ include: Photo });
+    let photos = await Photo.findAll();
 
-    /* photos = await Photo.findAll({include:User});
-    const photosRating = photos.filter(photo => {
-        return photo.numberOfStars > 4;
-    }); */
+    photos.forEach((photo) => {
+        let counter = 0; // contador de valoraciones dentro de la primer semana
+        // Iterar por cada Photorating correspondiente a esta Photo
+        photoratings.forEach((photorating) => {
+            if (photorating.idPhoto === photo.id) {
 
-    /*  photos = await Photo.findAll({ include: [User, Photorating] });
- 
- // Filtrar las fotos que tienen más de 50 valoraciones en la primera semana de publicación
- const filteredPhotos = photos.filter((photo) => {
-   const numRatings = photo.Photoratings.length;
-   const ageInDays = Math.ceil(
-     (Date.now() - new Date(photo.creationDate)) / (1000 * 60 * 60 * 24)
-   );
-   return numRatings >= 50 && ageInDays <= 7;
- });
- 
- // Calcular el valor promedio de las valoraciones para cada foto
- const ratedPhotos = filteredPhotos.map((photo) => {
-   const numRatings = photo.Photoratings.length;
-   const totalStars = photo.Photoratings.reduce(
-     (sum, rating) => sum + rating.starNumber,
-     0
-   );
-   const avgRating = totalStars / numRatings;
-   return { ...photo.toJSON(), avgRating };
- });
- 
- // Filtrar las fotos que tienen un valor promedio superior a 4
- const photosRating = ratedPhotos.filter((photo) => photo.avgRating > 4); */
-
-    const photosRating = await Photo.findAll({
-        attributes: ['id', 'title', 'numberOfStars'],
-        include: [{
-            model: Photorating,
-            attributes: [[Sequelize.fn('COUNT', Sequelize.col('Photoratings.id')), 'num_ratings']],
-            where: {
-                creationDate: {
-                    [Op.lt]: Sequelize.literal('DATE_ADD(creationDate, INTERVAL 7 DAY)')
+                // Obtener la fecha de creación de la Photo correspondiente a este Photorating
+                const photoCreationDate = new Date(photo.creationDate);
+                const photoratingCreationDate = new Date(photorating.creationDate);
+                const differenceInTime = photoratingCreationDate.getTime() - photoCreationDate.getTime();
+                const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
+                // Si la diferencia de días es menor o igual a 7, sumar al contador de valoraciones dentro de la primer semana
+                if (differenceInDays <= 7) {
+                    counter++;
                 }
-            },
-            group: ['Photoratings.idPhoto'],
-            having: {
-                [Op.and]: [
-                    Sequelize.literal('num_ratings > 50'),
-                    Sequelize.literal('AVG(Photoratings.starNumber) > 4')
-                ]
             }
-        }]
+        });
+        // Si la Photo tiene al menos 3 valoraciones dentro de la primer semana y tiene un numberOfStars mayor a 4, agregarla al array
+        if (counter >= 3 && photo.numberOfStars > 4) {
+            array.add(photo.id);
+        }
+    });
+
+    // Obtener todas las Photos que tienen un id en el array
+    let destacadas = await Photo.findAll({
+        where: {
+            id: Array.from(array), // Convertir el set a un array
+        },
     });
 
 
-
-    res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req, photosRating: photosRating });
+    res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req, photosRating: destacadas });
 };
 
 /* get /delete/:id */
@@ -192,14 +175,11 @@ exports.cargarDatos = async function (req, res, next) {
     });
 
 
-
-    let array = new Set(); // va a ser un set para que no haya repetidos
-
-    // Obtener todos los Photorating
+    /* zona donde consigo photosRating */
+    let array = new Set();
     let photoratings = await Photorating.findAll({ include: Photo });
-
-    // Iterar por cada Photo
     let photos = await Photo.findAll();
+
     photos.forEach((photo) => {
         let counter = 0; // contador de valoraciones dentro de la primer semana
         // Iterar por cada Photorating correspondiente a esta Photo
@@ -211,10 +191,6 @@ exports.cargarDatos = async function (req, res, next) {
                 const photoratingCreationDate = new Date(photorating.creationDate);
                 const differenceInTime = photoratingCreationDate.getTime() - photoCreationDate.getTime();
                 const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
-                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                console.log(differenceInDays)
-                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
                 // Si la diferencia de días es menor o igual a 7, sumar al contador de valoraciones dentro de la primer semana
                 if (differenceInDays <= 7) {
                     counter++;
@@ -234,8 +210,6 @@ exports.cargarDatos = async function (req, res, next) {
         },
     });
 
-    console.log("-----------------------------------")
-    console.log(array)
 
     res.render("home", { photos: randomPhotos.reverse(), labels: labels, users: users, req: req, photosRating: destacadas })
 }
