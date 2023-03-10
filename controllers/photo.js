@@ -192,15 +192,53 @@ exports.cargarDatos = async function (req, res, next) {
     });
 
 
-    let = photosRating...
- 
 
-    console.log("----------------------------------")
-    console.log(photosRating)
+    let array = new Set(); // va a ser un set para que no haya repetidos
 
-    res.render("home", { photos: randomPhotos.reverse(), labels: labels, users: users, req: req, photosRating: photosRating })
+    // Obtener todos los Photorating
+    let photoratings = await Photorating.findAll({ include: Photo });
+
+    // Iterar por cada Photo
+    let photos = await Photo.findAll();
+    photos.forEach((photo) => {
+        let counter = 0; // contador de valoraciones dentro de la primer semana
+        // Iterar por cada Photorating correspondiente a esta Photo
+        photoratings.forEach((photorating) => {
+            if (photorating.idPhoto === photo.id) {
+
+                // Obtener la fecha de creación de la Photo correspondiente a este Photorating
+                const photoCreationDate = new Date(photo.creationDate);
+                const photoratingCreationDate = new Date(photorating.creationDate);
+                const differenceInTime = photoratingCreationDate.getTime() - photoCreationDate.getTime();
+                const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                console.log(differenceInDays)
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+                // Si la diferencia de días es menor o igual a 7, sumar al contador de valoraciones dentro de la primer semana
+                if (differenceInDays <= 7) {
+                    counter++;
+                }
+            }
+        });
+        // Si la Photo tiene al menos 3 valoraciones dentro de la primer semana y tiene un numberOfStars mayor a 4, agregarla al array
+        if (counter >= 3 && photo.numberOfStars > 4) {
+            array.add(photo.id);
+        }
+    });
+
+    // Obtener todas las Photos que tienen un id en el array
+    let destacadas = await Photo.findAll({
+        where: {
+            id: Array.from(array), // Convertir el set a un array
+        },
+    });
+
+    console.log("-----------------------------------")
+    console.log(array)
+
+    res.render("home", { photos: randomPhotos.reverse(), labels: labels, users: users, req: req, photosRating: destacadas })
 }
-
 
 
 /* get /sort/:manera */
