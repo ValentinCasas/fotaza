@@ -5,7 +5,7 @@ const Jimp = require('jimp');
 const Op = Sequelize.Op;
 const fs = require("fs");
 
-/* post /buscar */
+/* post /buscar */   /* --- agregarle el ratingPhoto bien hecho */
 
 exports.buscarPhotos = async function (req, res) {
     const frase = req.body.buscar;
@@ -53,12 +53,60 @@ exports.buscarPhotos = async function (req, res) {
     let photos = [...photosByTitle, ...photosByLabel];
     const photosWithoutDuplicates = removeDuplicates(photos);
 
-    photos = await Photo.findAll({include:User});
+
+    /* photos = await Photo.findAll({include:User});
     const photosRating = photos.filter(photo => {
         return photo.numberOfStars > 4;
+    }); */
+
+    /*  photos = await Photo.findAll({ include: [User, Photorating] });
+ 
+ // Filtrar las fotos que tienen más de 50 valoraciones en la primera semana de publicación
+ const filteredPhotos = photos.filter((photo) => {
+   const numRatings = photo.Photoratings.length;
+   const ageInDays = Math.ceil(
+     (Date.now() - new Date(photo.creationDate)) / (1000 * 60 * 60 * 24)
+   );
+   return numRatings >= 50 && ageInDays <= 7;
+ });
+ 
+ // Calcular el valor promedio de las valoraciones para cada foto
+ const ratedPhotos = filteredPhotos.map((photo) => {
+   const numRatings = photo.Photoratings.length;
+   const totalStars = photo.Photoratings.reduce(
+     (sum, rating) => sum + rating.starNumber,
+     0
+   );
+   const avgRating = totalStars / numRatings;
+   return { ...photo.toJSON(), avgRating };
+ });
+ 
+ // Filtrar las fotos que tienen un valor promedio superior a 4
+ const photosRating = ratedPhotos.filter((photo) => photo.avgRating > 4); */
+
+    const photosRating = await Photo.findAll({
+        attributes: ['id', 'title', 'numberOfStars'],
+        include: [{
+            model: Photorating,
+            attributes: [[Sequelize.fn('COUNT', Sequelize.col('Photoratings.id')), 'num_ratings']],
+            where: {
+                creationDate: {
+                    [Op.lt]: Sequelize.literal('DATE_ADD(creationDate, INTERVAL 7 DAY)')
+                }
+            },
+            group: ['Photoratings.idPhoto'],
+            having: {
+                [Op.and]: [
+                    Sequelize.literal('num_ratings > 50'),
+                    Sequelize.literal('AVG(Photoratings.starNumber) > 4')
+                ]
+            }
+        }]
     });
 
-    res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req, photosRating:photosRating });
+
+
+    res.render("home", { photos: photosWithoutDuplicates, labels: labels, users: users, req: req, photosRating: photosRating });
 };
 
 /* get /delete/:id */
@@ -112,7 +160,6 @@ exports.deletePhoto = async function (req, res, next) {
 /* get / */
 exports.cargarDatos = async function (req, res, next) {
 
-    const photos = await Photo.findAll();
     const users = await User.findAll();
     const labels = await Label.findAll({ include: Photo });
     const oneYearAgo = new Date();
@@ -144,9 +191,12 @@ exports.cargarDatos = async function (req, res, next) {
         return photos[randomIndex];
     });
 
-    const photosRating = photos.filter(photo => {
-        return photo.numberOfStars > 4;
-    });
+
+    let = photosRating...
+ 
+
+    console.log("----------------------------------")
+    console.log(photosRating)
 
     res.render("home", { photos: randomPhotos.reverse(), labels: labels, users: users, req: req, photosRating: photosRating })
 }
@@ -155,7 +205,7 @@ exports.cargarDatos = async function (req, res, next) {
 
 /* get /sort/:manera */
 exports.sortPhoto = async function (req, res, next) {
-    let photos = await Photo.findAll({include: User});
+    let photos = await Photo.findAll({ include: User });
     const users = await User.findAll();
     const labels = await Label.findAll({ include: Photo });
 
