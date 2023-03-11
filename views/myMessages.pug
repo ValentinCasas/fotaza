@@ -24,14 +24,15 @@ html
         div.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-4.mx-0.p-2#contain-box-msg(action="/comment/sendComment" method="post")
             div.col-lg-11.col-md-11.col-sm-12.col-xs-12.p-2#box-msg
                 each message in messages
-                    div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
-                        i#i-msg #{message.User.name} #{message.User.surname}
+                    .containerChat.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2                
+                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
+                            i#i-msg #{message.User.name} #{message.User.surname}
 
-                    div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#img
-                        img(src=`/${message.description}`)
+                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#img
+                            img(src=`/${message.description}`)
 
-                    div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
-                        p#p-msg #{message.message}
+                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
+                            p#p-msg #{message.message}
 
                 div.col-lg-12.col-md-12.col-sm-12.col-xs-12#linea-msg
 

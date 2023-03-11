@@ -24,9 +24,16 @@
     transition: 1s ease all;
 }
 
+.containerChat {
+    border: .5px solid rgba(105, 98, 98, 0.459);
+    border-radius: 2rem;
+}
+
 #box-msg {
     height: 75vh;
     overflow-y: scroll;
+    /* border-radius: 2rem; */
+    border: .5px solid rgba(107, 101, 101, 0.459);
     background-color: #ffffff15;
 }
 
@@ -63,13 +70,8 @@ i {
     height: 100%;
 }
 
-
-#linea-msg {
-    background-color: rgba(255, 255, 255, 0.178);
-}
-
 #img img {
     object-fit: contain;
     max-height: 300px;
-
+    border-radius: 2rem;
 }

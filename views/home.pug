@@ -91,11 +91,16 @@ html
                         button#btn
                             a#button_top.col-lg-12.col-md-12.col-sm-12.col-xs-12(href="/message/view/myOffers") Mis ofertas
 
-            div#box-cards.col-lg-8.col-md-12.col-sm-12.col-xs-12.my-2.p-4
+            div#box-cards.col-lg-8.col-md-12.col-sm-12.col-xs-12.my-2.p-3
                 div#box-buscar.row.justify-content-center.col-lg-10.col-md-10.col-sm-10.col-xs-10
-                    form(action="/photo/buscar" method="post").row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                        input#buscar.col-lg-6.col-md-8.col-sm-8.col-xs-8(name="buscar" placeholder="[ ...")
-                        button#buscar.col-md-4.col-sm-4.col-xs-4.buscar Buscar
+                    if !req.session.isLoggedIn
+                        form(action="/unauthenticated/buscar" method="post").row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                            input#buscar.col-lg-6.col-md-8.col-sm-8.col-xs-8(name="buscar" placeholder="[ ...")
+                            button#buscar.col-md-4.col-sm-4.col-xs-4.buscar Buscar
+                    else
+                        form(action="/photo/buscar" method="post").row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                            input#buscar.col-lg-6.col-md-8.col-sm-8.col-xs-8(name="buscar" placeholder="[ ...")
+                            button#buscar.col-md-4.col-sm-4.col-xs-4.buscar Buscar
 
                 div#box-add.row.justify-content-end.col-lg-2.col-md-2.col-sm-2.col-xs-2
                     div.col-lg-12.col-md-12.col-sm-12.col-xs-12

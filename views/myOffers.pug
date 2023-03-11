@@ -24,17 +24,17 @@ html
         div#contain-box-msg.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-4.mx-0.p-2
             div#box-msg.col-lg-11.col-md-11.col-sm-12.col-xs-12.p-2
                 each message in messages
-                    div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                        i#i-msg #{message.User.name} #{message.User.surname}
+                    .containerChat.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2    
+                        div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
+                            i#i-msg #{message.User.name} #{message.User.surname}
 
-                    div#img.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                        img(src=`/${message.Photo.image}`)
+                        div#img.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
+                            img(src=`/${message.Photo.image}`)
 
-                    div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                        h6#i-msg Contacto: #{message.User.email}
+                        div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
+                            h6#i-msg Contacto: #{message.User.email}
 
-                    div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                        p#p-msg #{message.description}
+                        div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
+                            p#p-msg #{message.description}
 
-                    div#linea-msg.col-lg-12.col-md-12.col-sm-12.col-xs-12
 
