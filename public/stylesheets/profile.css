@@ -35,6 +35,7 @@ body::-webkit-scrollbar-thumb,
 
 #contain-cards{
     background-color: rgba(200, 207, 207, 0.363);
+    border-radius: 10px;
 }
 
 * {
@@ -50,6 +51,7 @@ body::-webkit-scrollbar-thumb,
 
 #card-img {
     background-color: rgba(255, 255, 255, 0.356);
+    border-radius: 10px;
 }
 
 

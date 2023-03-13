@@ -8,8 +8,13 @@ function sendBuyMSG(idPhoto, idOwner) {
         showCancelButton: true,
         confirmButtonText: 'Enviar',
         cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#9400D3',
-        cancelButtonColor: '#9400D3', 
+        confirmButtonColor: '#5256ade3',
+        cancelButtonColor: '#5256ade3', 
+        customClass: {
+            popup: 'my-custom-popup-class',
+            confirmButton: 'my-custom-button-class',
+            cancelButton: 'my-custom-button-class'
+        }
     }).then(result => {
         if (result.value) {
             // Obtenemos el valor del input del Sweet Alert

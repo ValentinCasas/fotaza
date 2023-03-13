@@ -3,36 +3,40 @@ html
     head
         title= title
 
-        link(rel='stylesheet' href='/home.css')    
+        link(rel='stylesheet' href='/home.css')  
+        link(rel='stylesheet' href='/nav.css')  
+        link(rel='stylesheet' href='/sweetAlert.css')  
+
         link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-        link(rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css")
+
 
         script(type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js")
         script(nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js")
-
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css")
         script(src="https://cdn.jsdelivr.net/npm/sweetalert2@10")
 
         script(content-type="JavaScript" src="/messages-section.js" defer) 
         script(content-type="JavaScript" src="/sweetAlert.js" defer)
         script(content-type="JavaScript" src="/home.js" defer) 
+        script(content-type="JavaScript" src="/nav.js" defer) 
 
     body
 
-
-        nav#nav-bar
-            .col-lg-8.col-md-10.col-sm-6.col-xs-6
+        header
+            div.container.align-items-centercol-lg-12.col-md-12.col-sm-12.col-xs-12
                 a#fotaza(href="/photo")
                     h1#fotaza Fotaza
-            .col-lg-4.col-md-6.col-sm-6.col-xs-6#contain-profile-icons
-                .col-lg-6.col-md-6.col-sm-6.col-xs-6#contain-profile-icon
-                    a(href="/auth/logout")
-                        ion-icon#profile-icon(name="power-sharp")
-                .col-lg-6.col-md-6.col-sm-6.col-xs-6#contain-profile-icon
-                    a(href="/user/profile")
-                        ion-icon#profile-icon(name="person-circle-sharp")    
-
+                nav
+                    div.close-icon
+                        ion-icon#profile-icon(name="close")
+                    a.active(href="/photo") home
+                    a(href="/auth/logout") Logout
+                    a(href="/user/profile") Mi perfil
+                div.bar-icon
+                    ion-icon#profile-icon(name="list")
+                div.overlay
 
         #top-photos
             each photo in photosRating
@@ -57,6 +61,7 @@ html
             #cuadro-menu
                 a(href="/photo/sort/private")
                     button#contact-btn Privadas
+            div.overlay                    
 
         //menu para comparir imagenes
         div#contain-menu-share
@@ -77,7 +82,7 @@ html
 
             details#options.row.col-lg-3.col-md-12.col-sm-12.col-xs-12.my-4.mx-4.p-4
                 summary  OPCIONES
-                div#buttons-card.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2.p-4
+                div#buttons-card.justify-content-center.my-2.p-4
                     div.row
                         button#btn
                             a#button_top.col-lg-12.col-md-12.col-sm-12.col-xs-12(href="/photo/view/almacenar") Almacenar

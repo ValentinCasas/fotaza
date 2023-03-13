@@ -103,5 +103,3 @@ nextButton.addEventListener('click', showNextImage);
 
 showImage(currentIndex);
 
-
-

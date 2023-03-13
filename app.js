@@ -50,6 +50,7 @@ app.use(upload({ limits: { fileSize: 1024 * 1024 } }));
 app.use(cookieParser());
 
 
+
 app.use('/', indexRouter);
 app.use('/', functionsRouter);
 app.use('/user',isAutenticatedBD, userRouter)

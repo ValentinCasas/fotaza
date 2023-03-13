@@ -1,0 +1,32 @@
+html
+    head
+        title= title
+
+        link(rel='stylesheet' href='/nav.css')    
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous")
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous")
+
+
+    body
+
+        nav.navbar.navbar-expand-lg
+            .container
+                a#fotaza(href="/photo")
+                    h1#fotaza Fotaza
+                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation")
+                    span.navbar-toggler-icon
+                div.collapse.navbar-collapse#navbarMain
+                    ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+                        li.nav-item
+                            a.nav-link.active(aria-current="page" href="#") Home
+                        li.nav-item
+                            a.nav-link(href="/auth/logout") Logout
+                        li.nav-item.dropdown
+                            a.nav-link.dropdown-toggle(id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false") Perfil
+                            ul.dropdown-menu(aria-labelledby="navbarDropdown")
+                                li
+                                    a.dropdown-item(href="/user/profile") Mi perfil
+
+                        li.nav-item
+                            a.nav-link.disabled Coming soon
+

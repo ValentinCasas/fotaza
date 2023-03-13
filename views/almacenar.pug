@@ -4,30 +4,36 @@ html
         title= title
 
         link(rel='stylesheet' href='/almacenar.css')
+        link(rel='stylesheet' href='/nav.css')
+
         link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+
+
         link(rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css")
         script(type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js")
         script(nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js")
 
         script(src="//cdn.jsdelivr.net/npm/sweetalert2@11")
         script(src="/almacenar.js" defer) 
+        script(src="/nav.js" defer) 
 
     body
 
-        nav#nav-bar
-            div.col-lg-8.col-md-10.col-sm-6.col-xs-6
+        header
+            div.container.align-items-centercol-lg-12.col-md-12.col-sm-12.col-xs-12
                 a#fotaza(href="/photo")
                     h1#fotaza Fotaza
-            div#contain-profile-icons.col-lg-4.col-md-6.col-sm-6.col-xs-6
-                div#contain-profile-icon.col-lg-6.col-md-6.col-sm-6.col-xs-6
-                    a(href="/auth/logout")
-                        ion-icon#profile-icon(name="power-sharp")
-                div#contain-profile-icon.col-lg-6.col-md-6.col-sm-6.col-xs-6
-                    a(href="/user/profile")
-                        ion-icon#profile-icon(name="person-circle-sharp")
-
+                nav
+                    div.close-icon
+                        ion-icon#profile-icon(name="close")
+                    a.active(href="/photo") home
+                    a(href="/auth/logout") Logout
+                    a(href="/user/profile") Mi perfil
+                div.bar-icon
+                    ion-icon#profile-icon(name="list")
+                div.overlay
 
         div#almacenar.row.justify-content-center.col-lg-10.col-md-8.col-sm-12.col-xs-12.my-5.p-4
             form.row.justify-content-center.col-lg-11.col-md-11.col-sm-11.col-xs-11.mx-2(action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data')
@@ -56,7 +62,7 @@ html
                     option(value="Creative Commons") Creative Commons
                 label.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2 Imagen
                 input.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.btn-primary.p-1(type="file" name="imagen" accept="image/jpeg,image/jpg,image/png" required="")
-                
+
                 label.col-lg-11.col-md-11.col-sm-11.col-xs-11.my-2.p-2 Info marca de agua:
                 details.text-white.col-lg-11.col-md-11.col-sm-11.col-xs-11.my-2.p-2
                     summary
@@ -66,7 +72,7 @@ html
                     p.my-4 - En el caso que este usando Copyright y no seleccione una foto, se tomara una imagen elegida por fotaza como marca de agua.
                     p.my-4 - En el caso de que suba una imagen y no este utilizando Copyright, entonces no se tomara en cuenta.
                     input.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.btn-info.p-1(type="file" name="watermark" accept="image/jpeg,image/jpg,image/png")
-                
+
                 div.data-photo-box.my-5
                     input(type="text" name="label1" required="")
                     label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 etiqueta 1
