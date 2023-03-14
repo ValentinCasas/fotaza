@@ -231,6 +231,10 @@ p {
     outline: none;
 }
 
+#buscar:hover{
+    background-color: rgba(77, 82, 82, 0.144);
+}
+
 #box-buscar {
     position: sticky;
     top: -37px;
@@ -794,4 +798,6 @@ p {
 }
 
 
-
+#search-outline{
+    font-size: 20px;
+}
