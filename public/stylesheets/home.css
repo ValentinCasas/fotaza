@@ -182,24 +182,19 @@ p {
 
 #photo-card {
     width: 100%;
+    height: 400px ;
     background-color: #0000001e;
-    border-radius: 10px;
+    border-radius: 2rem;
 }
 
 #photo-card img {
-    object-fit: fill;
+    /* object-fit: contain; */
+    /* object-fit: fill; */
     object-fit: contain;
     width: 100%;
-    height: 400px;
+    height: 100%;
+    border-radius: 2rem;
 }
-
-/* #fotaza {
-    --gradien-right: #B54FF3;
-    --gradien-left: #4f46e5;
-    background: linear-gradient(var(--gradien-right), var(--gradien-left));
-    -webkit-background-clip: text;
-    color: transparent;
-} */
 
 #almacenar-btn,
 #ordenar-btn,

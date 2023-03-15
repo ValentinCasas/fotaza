@@ -36,6 +36,7 @@ const indicatorsContainer = document.querySelector('.slider-indicators');
 const images = [
   '/910923.png',
   '/template.png',
+  '/logo3.png',
 ];
 
 let currentIndex = 0;
@@ -43,6 +44,7 @@ let currentIndex = 0;
 const addImage = (image) => {
   const imgElement = document.createElement('img');
   imgElement.src = image;
+  imgElement.title = "fotos importantes";
   sliderImages.appendChild(imgElement);
 };
 
