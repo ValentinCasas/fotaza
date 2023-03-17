@@ -99,17 +99,25 @@ html(lang="es")
                             a#button_top.col-lg-12.col-md-12.col-sm-12.col-xs-12(href="/message/view/myOffers") Mis ofertas
 
             div#box-cards.col-lg-8.col-md-12.col-sm-12.col-xs-12.my-2.p-3
-                div#box-buscar.row.justify-content-center.col-lg-10.col-md-10.col-sm-10.col-xs-10
+                div#box-buscar.row.col-lg-10.col-md-10.col-sm-10.col-xs-10
                     if !req.session.isLoggedIn
-                        form(action="/unauthenticated/buscar" method="post").row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                            input#buscar.col-lg-6.col-md-8.col-sm-8.col-xs-8(name="buscar" placeholder="[ ...")
-                            button#buscar.col-md-4.col-sm-4.col-xs-4.buscar
-                                ion-icon(name="search-outline" id="search-outline")
+                        form.form(action="/unauthenticated/buscar" method="post")
+                            button
+                                svg(width="17" alt="Buscar imagen" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search")
+                                    path(d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round")
+                            input.input(placeholder="buscador" name="buscar" type="text" autocomplete="off")
+                            button.reset(type="reset")
+                                svg(xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2")
+                                    path(stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12")        
                     else
-                        form(action="/photo/buscar" method="post").row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                            input#buscar.col-lg-6.col-md-8.col-sm-8.col-xs-8(name="buscar" placeholder="[ ...")
-                            button#buscar.col-md-4.col-sm-4.col-xs-4.buscar 
-                                ion-icon(name="search-outline" id="search-outline")
+                        form.form(action="/photo/buscar" method="post")
+                            button
+                                svg(width="17" alt="Buscar imagen" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search")
+                                    path(d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round")
+                            input.input(placeholder="buscador" name="buscar" type="text" autocomplete="off")
+                            button.reset(type="reset")
+                                svg(xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2")
+                                    path(stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12")
 
                 div#box-add.row.justify-content-end.col-lg-2.col-md-2.col-sm-2.col-xs-2
                     div.col-lg-12.col-md-12.col-sm-12.col-xs-12

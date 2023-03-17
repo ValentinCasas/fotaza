@@ -182,7 +182,7 @@ p {
 
 #photo-card {
     width: 100%;
-    height: 400px ;
+    height: 400px;
     background-color: #0000001e;
     border-radius: 2rem;
 }
@@ -209,40 +209,6 @@ p {
     color: white;
     border-radius: 5px;
     cursor: pointer;
-}
-
-#buscar {
-    border: .1px solid black;
-    font-family: cursive;
-    margin-top: 20px;
-    padding: 10px 20px;
-    color: #000000;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    letter-spacing: 4px;
-    background-color: rgba(240, 255, 255, 0);
-    outline: none;
-}
-
-#buscar:hover{
-    background-color: rgba(77, 82, 82, 0.144);
-}
-
-#box-buscar {
-    position: sticky;
-    top: -37px;
-    z-index: 10;
-
-}
-
-#box-add {
-    margin-top: 14px;
-    position: sticky;
-    top: -15px;
-    z-index: 10;
-    animation: myAnim 2s ease 2s 1 normal forwards;
 }
 
 
@@ -563,7 +529,7 @@ p {
 
 .icon-btn {
     width: 50px;
-    height: 50px;
+    height: 40px;
     border: 1px solid #cdcdcd;
     background: white;
     border-radius: 25px;
@@ -793,6 +759,119 @@ p {
 }
 
 
-#search-outline{
+#search-outline {
     font-size: 20px;
+}
+
+
+
+
+
+
+#buscar {
+    border: .1px solid black;
+    font-family: cursive;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: #000000;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 4px;
+    background-color: rgba(240, 255, 255, 0);
+    outline: none;
+}
+
+#buscar:hover {
+    background-color: rgba(77, 82, 82, 0.144);
+}
+
+#box-buscar {
+    position: sticky;
+    top: -8px;
+    z-index: 10;
+}
+
+#box-add {
+    position: sticky;
+    top: -10px;
+    z-index: 10;
+    animation: myAnim 2s ease 2s 1 normal forwards;
+}
+
+.form button {
+    border: none;
+    background: none;
+    color: #8b8ba7;
+}
+
+.form {
+    --timing: 0.3s;
+    --width-of-input: 200px;
+    --height-of-input: 40px;
+    --border-height: 2px;
+    --input-bg: #fff;
+    --border-color: #2f2ee9;
+    --border-radius: 30px;
+    --after-border-radius: 1px;
+    width: var(--width-of-input);
+    height: var(--height-of-input);
+    display: flex;
+    align-items: center;
+    padding-inline: 0.8em;
+    border-radius: var(--border-radius);
+    background: rgba(0, 0, 0, 0.103);
+    border: .5px solid rgba(143,rgb(255, 255, 255), 140, 0.575);
+    transition: .5s ease;
+}
+
+.input {
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+}
+
+.form:focus-within{
+    border-bottom: .1px solid rgba(143, 142, 142, 0.822);
+    border-radius: var(--after-border-radius);
+    border-top-left-radius: 5px;
+    margin-left: -10px;
+    margin-top: -10px;
+    background-color: #0000004f;
+    color: white;
+}
+
+.form:focus-within > button > svg > path, .form:focus-within input.input::placeholder {
+    stroke: white;
+    color:white;
+}
+
+input:focus {
+    outline: none;
+}
+
+.form:focus-within:before {
+    transform: scale(1);
+}
+
+.reset {
+    border: none;
+    background: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+input:not(:placeholder-shown)~.reset {
+    opacity: 1;
+    visibility: visible;
+}
+
+.form svg {
+    width: 17px;
+    margin-top: 3px;
 }
