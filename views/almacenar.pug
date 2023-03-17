@@ -1,7 +1,9 @@
 doctype html
 html
     head
-        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title= "Fotaza"
+        link(rel="shortcut icon" type="image/x-icon" href="logo3.png" sizes="573x573")
 
         link(rel='stylesheet' href='/almacenar.css')
         link(rel='stylesheet' href='/nav.css')
@@ -18,6 +20,7 @@ html
         script(src="//cdn.jsdelivr.net/npm/sweetalert2@11")
         script(src="/almacenar.js" defer) 
         script(src="/nav.js" defer) 
+        script(content-type="JavaScript" src="/nav.js" defer) 
 
     body
 
@@ -28,9 +31,12 @@ html
                 nav
                     div.close-icon
                         ion-icon#profile-icon(name="close")
-                    a.active(href="/photo") home
-                    a(href="/auth/logout") Logout
-                    a(href="/user/profile") Mi perfil
+                    a(href="/photo") home
+                    a(href="/auth/logout") logout
+                    a.active(href="/photo/view/almacenar") almacenar
+                    a(href="/message/view/myMessages") mensajes
+                    a(href="/message/view/myOffers") ofertas
+                    a(href="/user/profile") perfil
                 div.bar-icon
                     ion-icon#profile-icon(name="list")
                 div.overlay

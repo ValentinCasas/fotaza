@@ -1,9 +1,12 @@
 html
     head
-        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title= "Fotaza"
+        link(rel="shortcut icon" type="image/x-icon" href="logo3.png" sizes="573x573")
 
         link(rel='stylesheet' href='/home.css')
         link(rel='stylesheet' href='/messages-section.css')
+        link(rel="stylesheet" href="/nav.css")
 
         link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
@@ -14,12 +17,28 @@ html
         script(nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js")
 
         script(src="/socket.io/socket.io.js")
+        script(content-type="JavaScript" src="/nav.js" defer)
 
     body
 
-
-        a#cerrar-comments(href="/photo")
-            ion-icon#icon-cerrar-comment(name="close")
+        header
+            div.container.align-items-centercol-lg-12.col-md-12.col-sm-12.col-xs-12
+                a#fotaza(href="/photo")
+                    h1#fotaza Fotaza
+                nav
+                    div.close-icon
+                        ion-icon#profile-icon(name="close")
+                    a(href="/photo") home
+                    a(href="/auth/logout") logout
+                    a(href="/photo/view/almacenar") almacenar
+                    a(href="/message/view/myMessages") mensajes
+                    a.active(href="/message/view/myOffers") mis ofertas
+                    a(href="/user/profile") perfil
+                    a#cerrar-comments(href="/photo") 
+                        ion-icon#icon-cerrar-comment(name="close")
+                div.bar-icon
+                    ion-icon#profile-icon(name="list")
+                div.overlay
 
         div#contain-box-msg.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-4.mx-0.p-2
             div#box-msg.col-lg-11.col-md-11.col-sm-12.col-xs-12.p-2

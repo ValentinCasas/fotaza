@@ -1,7 +1,7 @@
 function sendBuyMSG(idPhoto, idOwner) {
     swal.fire({
         title: 'Ingresa un mensaje',
-        text: 'Escribe un mensaje para enviar al autor de la foto',
+        text: `Escribe un mensaje para enviar al autor de la foto`,
         icon: 'success',
         input: 'text',
         inputPlaceholder: 'Escribe aquí tu mensaje',

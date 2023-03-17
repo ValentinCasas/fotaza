@@ -34,8 +34,11 @@ html(lang="es")
                     div.close-icon
                         ion-icon#profile-icon(name="close")
                     a.active(href="/photo") home
-                    a(href="/auth/logout") Logout
-                    a(href="/user/profile") Mi perfil
+                    a(href="/auth/logout") logout
+                    a(href="/photo/view/almacenar") almacenar
+                    a(href="/message/view/myMessages") mensajes
+                    a(href="/message/view/myOffers") ofertas
+                    a(href="/user/profile") perfil
                 div.bar-icon
                     ion-icon#profile-icon(name="list")
                 div.overlay
@@ -82,7 +85,7 @@ html(lang="es")
         //caja donde estan todas las imagenes
         div#box-padre.row.justify-content-center.mx-2.my-5.px-3.col-lg-12.col-md-12.col-sm-12.col-xs-12
 
-            details#options.row.col-lg-3.col-md-12.col-sm-12.col-xs-12.my-4.mx-4.p-4
+            details#options.row.col-lg-3.col-md-12.col-sm-12.col-xs-12.my-2.mx-4.p-4
                 summary  OPCIONES
                 div#buttons-card.justify-content-center.my-2.p-4
                     div.row
@@ -124,7 +127,7 @@ html(lang="es")
                         button.icon-btn.add-btn
                             div.add-icon
                             div.btn-txt
-                                a(href="/photo/view/almacenar" style="text-decoration:none; color:black;") Add Photo
+                                a(href="/photo/view/almacenar" style="text-decoration:none; color:black;") Add
 
                 each photo in photos
 

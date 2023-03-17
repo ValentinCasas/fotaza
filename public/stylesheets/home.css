@@ -40,7 +40,8 @@ body::-webkit-scrollbar,
 }
 
 #box-cards:hover::-webkit-scrollbar,
-#top-photos:hover::-webkit-scrollbar {
+#top-photos:hover::-webkit-scrollbar,
+#box-msg:hover::-webkit-scrollbar {
     display: block;
 }
 
@@ -145,8 +146,8 @@ body::-webkit-scrollbar-thumb,
     padding: 5px;
     border: 1px solid rgba(99, 93, 93, 0.904);
     height: 50px;
-    border-radius: 2rem;
-    transition: .5s ease all;
+    border-radius: 25px;
+    transition: .5s ease;
     background-color: #f8f8f8;
 }
 
@@ -154,7 +155,7 @@ body::-webkit-scrollbar-thumb,
     padding: 5px;
     border: 1px solid black;
     height: auto;
-    border-radius: 0;
+    border-radius: 5px;
     background: #6e72b3c4;
 }
 
@@ -277,7 +278,7 @@ p {
 #contain-menu {
     border: none;
     padding: 5px;
-    background: linear-gradient(145deg, #cacacad7, #482580ec);
+    background-color: #a1a0afdb;
     width: 200px;
     height: 100%;
     position: fixed;
@@ -291,7 +292,7 @@ p {
 #contain-menu-share {
     border: none;
     padding: 5px;
-    background: linear-gradient(145deg, #cacacadc, #482580dc);
+    background: #a1a0afdb;
     width: 200px;
     height: 100%;
     position: fixed;
@@ -531,7 +532,7 @@ p {
     width: 50px;
     height: 40px;
     border: 1px solid #cdcdcd;
-    background: white;
+    background: rgba(0, 0, 0, 0.103);
     border-radius: 25px;
     overflow: hidden;
     z-index: 50;
@@ -542,7 +543,7 @@ p {
 }
 
 .add-btn:hover {
-    width: 120px;
+    width: 80px;
 }
 
 .add-btn::before,
@@ -791,6 +792,7 @@ p {
     position: sticky;
     top: -8px;
     z-index: 10;
+    margin-right: 5px;
 }
 
 #box-add {
@@ -822,7 +824,7 @@ p {
     padding-inline: 0.8em;
     border-radius: var(--border-radius);
     background: rgba(0, 0, 0, 0.103);
-    border: .5px solid rgba(143,rgb(255, 255, 255), 140, 0.575);
+    border: .5px solid rgba(143, rgb(255, 255, 255), 140, 0.575);
     transition: .5s ease;
 }
 
@@ -836,19 +838,22 @@ p {
     padding-block: 0.7em;
 }
 
-.form:focus-within{
+.form:focus-within {
     border-bottom: .1px solid rgba(143, 142, 142, 0.822);
+    border-right: .1px solid rgba(143, 142, 142, 0.822);
     border-radius: var(--after-border-radius);
     border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     margin-left: -10px;
     margin-top: -10px;
-    background-color: #0000004f;
-    color: white;
+    /*   background-color: #0000004f; */
+    color: rgb(26, 25, 25);
 }
 
-.form:focus-within > button > svg > path, .form:focus-within input.input::placeholder {
+.form:focus-within>button>svg>path,
+.form:focus-within input.input::placeholder {
     stroke: white;
-    color:white;
+    color: white;
 }
 
 input:focus {
@@ -874,4 +879,9 @@ input:not(:placeholder-shown)~.reset {
 .form svg {
     width: 17px;
     margin-top: 3px;
+    transition: .5s ease;
+}
+
+.form svg:hover {
+    color: seagreen;
 }
