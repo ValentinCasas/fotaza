@@ -96,49 +96,35 @@ exports.buscarPhotos = async function (req, res) {
 exports.deletePhoto = async function (req, res, next) {
     const id = req.params.id;
 
-    const photos = Photo.findAll({ where: { id: id } }).then(response => {
+    const photos = await Photo.findAll({ where: { id: id } });
 
-        if (response[0].image && fs.existsSync(`./public/images/${response[0].image}`)) {
-            fs.unlink(`./public/images/${response[0].image}`, function (err) {
-                if (err) {
-                    console.log("Hubo un error al intentar borrar el archivo: ", err);
-                } else {
-                    console.log("El archivo se ha borrado correctamente");
-                }
-            });
+    if (photos.length > 0) {
+        if (photos[0].image && fs.existsSync(`./public/images/${photos[0].image}`)) {
+            fs.unlinkSync(`./public/images/${photos[0].image}`);
+            console.log("El archivo se ha borrado correctamente");
         }
 
-        if (response[0].imageWatermark && fs.existsSync(`./public/imagesWatermark/${response[0].imageWatermark}`)) {
-            fs.unlink(`./public/imagesWatermark/${response[0].imageWatermark}`, function (err) {
-                if (err) {
-                    console.log("Hubo un error al intentar borrar el archivo: ", err);
-                } else {
-                    console.log("El archivo se ha borrado correctamente");
-                }
-            })
+        if (photos[0].imageWatermark && fs.existsSync(`./public/imagesWatermark/${photos[0].imageWatermark}`)) {
+            fs.unlinkSync(`./public/imagesWatermark/${photos[0].imageWatermark}`);
+            console.log("El archivo se ha borrado correctamente");
         }
 
-        if (response[0].imageWatermarkFotaza && fs.existsSync(`./public/imagesWatermarkFotaza/${response[0].imageWatermarkFotaza}`)) {
-            fs.unlink(`./public/imagesWatermarkFotaza/${response[0].imageWatermarkFotaza}`, function (err) {
-                if (err) {
-                    console.log("Hubo un error al intentar borrar el archivo: ", err);
-                } else {
-                    console.log("El archivo se ha borrado correctamente");
-                }
-            })
+        if (photos[0].imageWatermarkFotaza && fs.existsSync(`./public/imagesWatermarkFotaza/${photos[0].imageWatermarkFotaza}`)) {
+            fs.unlinkSync(`./public/imagesWatermarkFotaza/${photos[0].imageWatermarkFotaza}`);
+            console.log("El archivo se ha borrado correctamente");
         }
 
-        Comment.destroy({ where: { idPhoto: id } })
-        Label.destroy({ where: { idPhoto: id } })
-        Photorating.destroy({ where: { idPhoto: id } });
-        MsgBuyPhoto.destroy({ where: { idPhoto: id } })
-        Message.destroy({ where: { description: response[0].image } });
-        Photo.destroy({ where: { id: id } })
-    })
-
+        await Comment.destroy({ where: { idPhoto: id } });
+        await Label.destroy({ where: { idPhoto: id } });
+        await Photorating.destroy({ where: { idPhoto: id } });
+        await MsgBuyPhoto.destroy({ where: { idPhoto: id } });
+        await Message.destroy({ where: { description: photos[0].image } });
+        await Photo.destroy({ where: { id: id } });
+    }
 
     res.redirect("/user/profile");
 }
+
 
 /* get / */
 exports.cargarDatos = async function (req, res, next) {

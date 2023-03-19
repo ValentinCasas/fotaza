@@ -19,8 +19,23 @@ html
 
         script(src="//cdn.jsdelivr.net/npm/sweetalert2@11")
         script(src="/almacenar.js" defer) 
-        script(src="/nav.js" defer) 
         script(content-type="JavaScript" src="/nav.js" defer) 
+
+        script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+        script.
+            $(document).ready(function() {
+                // Detectar el cambio en el select#rightOfUse
+                $('#rightOfUse').on('change', function() {
+                    var selected = $(this).val();
+                    // Mostrar o ocultar el campo de entrada del watermark según el valor seleccionado
+                    if (selected == 'Copyright') {
+                        $('#watermark-wrapper').show();
+                    } else {
+                        $('#watermark-wrapper').hide();
+                    }
+                });
+            });
+
 
     body
 
@@ -41,16 +56,21 @@ html
                     ion-icon#profile-icon(name="list")
                 div.overlay
 
-        div#almacenar.row.justify-content-center.col-lg-10.col-md-8.col-sm-12.col-xs-12.my-5.p-4
-            form.row.justify-content-center.col-lg-11.col-md-11.col-sm-11.col-xs-11.mx-2(action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data')
-                div.data-photo-box.my-5
+        div#almacenar.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.p-4
+            form.row.justify-content-center.col-lg-6.col-md-8.col-sm-21.col-xs-11.mx-2(action="photo/almacenar/submitPhoto" method="post" enctype='multipart/form-data')
+                //titulo 
+                div.data-photo-box
                     input(type="text" name="title" required="")
                     label Titulo
+
                 label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 Privacidad
+                //privacidades
                 select#privacy.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.p-2(name="privacy")
                     option(value="protected") PROTEGIDA
                     option(value="public") PUBLICA
+
                 label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 Categoria
+                //categorias
                 select#category.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.p-2(name="category")
                     option(value="publicitaria") Publicitaria
                     option(value="artistica") Artistica
@@ -60,25 +80,25 @@ html
                     option(value="area") Area
                     option(value="accion") Accion
                     option(value="movimiento") Movimiento
+
+                //derechos de uso
                 label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 Derechos de uso
                 select#rightOfUse.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.p-2(name="rightOfUse")
-                    option(value="Copyright") Copyright
                     option(value="Copyleft") Copyleft
-                    option(value="Public Domain") Public Domain
-                    option(value="Creative Commons") Creative Commons
-                label.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2 Imagen
-                input.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.btn-primary.p-1(type="file" name="imagen" accept="image/jpeg,image/jpg,image/png" required="")
+                    option(value="Copyright") Copyright
 
-                label.col-lg-11.col-md-11.col-sm-11.col-xs-11.my-2.p-2 Info marca de agua:
-                details.text-white.col-lg-11.col-md-11.col-sm-11.col-xs-11.my-2.p-2
-                    summary
-                        ion-icon(name="list-outline" style="font-size: 32px")
-                        i(style="font-size: 10px") click me
-                    p.my-4 - Si su imagen va a tener como derecho de autor Copyright, debera subir una imagen.
-                    p.my-4 - En el caso que este usando Copyright y no seleccione una foto, se tomara una imagen elegida por fotaza como marca de agua.
-                    p.my-4 - En el caso de que suba una imagen y no este utilizando Copyright, entonces no se tomara en cuenta.
-                    input.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.btn-info.p-1(type="file" name="watermark" accept="image/jpeg,image/jpg,image/png")
+                //imagen a subir
+                label.drop-container.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2(for='image-input') Imagen
+                    span.drop-title Drop files here
+                    input(type='file' accept='image/jpeg,image/jpg,image/png' required='' name="imagen" id='image-input')
 
+                //marca de agua
+                div#watermark-wrapper(style="display:none;").col-lg-11.col-md-11.col-sm-11.col-xs-11.my-2.p-2
+                    label.drop-container.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2(for='watermark-input') Watermark
+                        span.drop-title Drop files here
+                        input(type='file' accept='image/jpeg,image/jpg,image/png' required='' name="watermark" id='watermark-input') 
+               
+                //etiquetas
                 div.data-photo-box.my-5
                     input(type="text" name="label1" required="")
                     label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 etiqueta 1
@@ -89,10 +109,4 @@ html
                     input(type="text" name="label3" required)
                     label.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2 etiqueta 3
                 button#submitPhoto.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-4.p-4(type="submit") Subir
-
-
-        div.row.justify-content-center.col-lg-2.col-md-4.my-5
-            img(src="/like.png" height="400px" style="z-index:-10;")
-
-
 

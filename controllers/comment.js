@@ -22,7 +22,7 @@ exports.sendComment = async function (req, res) {
     fechaCreacion.toLocaleDateString()
 
     //agregar id del User que lo envio
-    Comment.create({
+    await Comment.create({
         description: msg,
         shippingDate: fechaCreacion,
         idPhoto: id,
@@ -32,6 +32,7 @@ exports.sendComment = async function (req, res) {
     const photo = await Photo.findAll({ where: { id: id } });
     const comments = await Comment.findAll({ where: { idPhoto: id }, include: [{ model: User }] });
 
-    res.render("messages-section", { photo: photo, comments: comments });
+    // Redirigir con JavaScript después de que se haya renderizado la página
+    res.render("messages-section", { photo: photo, comments: comments.reverse() });
 
 };

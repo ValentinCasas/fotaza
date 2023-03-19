@@ -19,7 +19,6 @@ html(lang="es")
         script(src="https://cdn.jsdelivr.net/npm/sweetalert2@10")
 
         script(src="/socket.io/socket.io.js")
-        script(content-type="JavaScript" src="/messages-section.js" defer) 
         script(content-type="JavaScript" src="/sweetAlert.js" defer)
         script(content-type="JavaScript" src="/home.js" defer) 
         script(content-type="JavaScript" src="/nav.js" defer) 
@@ -66,7 +65,7 @@ html(lang="es")
             #cuadro-menu
                 a(href="/photo/sort/private")
                     button#contact-btn Privadas
-            div.overlay                    
+        div.contain-menu-overlay                    
 
         //menu para comparir imagenes
         div#contain-menu-share
@@ -80,7 +79,7 @@ html(lang="es")
                 select#idReceptor.form-control(name="idReceptor")
                     each user in users
                         option(value=user.id)= user.name
-                button#contact-btn.my-4(class="btn btn-primary" type="submit") compartir
+                button#contact-btn.my-4(class="btn btn-primary" type="submit") compartir       
 
         //caja donde estan todas las imagenes
         div#box-padre.row.justify-content-center.mx-2.my-5.px-3.col-lg-12.col-md-12.col-sm-12.col-xs-12

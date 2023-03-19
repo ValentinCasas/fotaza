@@ -32,7 +32,8 @@ body::-webkit-scrollbar,
 #top-photos::-webkit-scrollbar,
 #contain-menu::-webkit-scrollbar,
 #box-msg::-webkit-scrollbar,
-#carde::-webkit-scrollbar {
+#carde::-webkit-scrollbar,
+.izquierda::-webkit-scrollbar {
     display: none;
     width: 3px;
     display: none;
@@ -41,11 +42,12 @@ body::-webkit-scrollbar,
 
 #box-cards:hover::-webkit-scrollbar,
 #top-photos:hover::-webkit-scrollbar,
-#box-msg:hover::-webkit-scrollbar {
+#box-msg:hover::-webkit-scrollbar,
+.izquierda:hover::-webkit-scrollbar{
     display: block;
 }
 
-#top-photos::-webkit-scrollbar {
+#top-photos::-webkit-scrollbar{
     height: 6px;
 }
 
@@ -55,7 +57,8 @@ body::-webkit-scrollbar-track,
 #top-photos::-webkit-scrollbar-track,
 #contain-menu::-webkit-scrollbar-track,
 #box-msg::-webkit-scrollbar-track,
-#carde::-webkit-scrollbar-track {
+#carde::-webkit-scrollbar-track,
+.izquierda::-webkit-scrollbar-track {
     background: rgb(0, 0, 0);
 }
 
@@ -64,7 +67,8 @@ body::-webkit-scrollbar-thumb,
 #top-photos::-webkit-scrollbar-thumb,
 #contain-menu::-webkit-scrollbar-thumb,
 #box-msg::-webkit-scrollbar-thumb,
-#carde::-webkit-scrollbar-thumb {
+#carde::-webkit-scrollbar-thumb,
+.izquierda::-webkit-scrollbar-thumb {
     background: linear-gradient(121deg, rgb(0, 0, 0) 37%, rgba(73, 27, 164, 1) 74%, rgba(112, 21, 247, 1) 88%);
 
 }
@@ -218,15 +222,16 @@ p {
 }
 
 #top-target-box {
+    background-color: #352157;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23352157' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23341f54' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23331d50' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23321b4d' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%2331194a' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23301747' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%232f1644' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%232e1441' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%232d123e' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%232b103b' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%232a0f38' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23290d35' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%23270b32' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%2326092f' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%2325072c' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%23230529' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%23220327' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: #562556;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23491f4d' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%233c1945' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%2330133c' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23240d33' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%231A042A' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: cover;
     margin-left: 0;
     margin-right: 0;
 }
@@ -278,8 +283,8 @@ p {
 #contain-menu {
     border: none;
     padding: 5px;
-    background-color: #a1a0afdb;
-    width: 200px;
+    background-color: #bbbbc2;
+    width: 250px;
     height: 100%;
     position: fixed;
     right: 100%;
@@ -292,8 +297,8 @@ p {
 #contain-menu-share {
     border: none;
     padding: 5px;
-    background: #a1a0afdb;
-    width: 200px;
+    background: #bbbbc2;
+    width: 300px;
     height: 100%;
     position: fixed;
     right: 100%;
@@ -301,6 +306,10 @@ p {
     z-index: 1000;
     transition: 1s;
     transform: translateX(0%);
+}
+
+#msg{
+    height: 100px;
 }
 
 #cuadro-menu {
@@ -884,4 +893,22 @@ input:not(:placeholder-shown)~.reset {
 
 .form svg:hover {
     color: seagreen;
+}
+
+
+
+
+
+.contain-menu-overlay  {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.contain-menu-overlay.active {
+    display: flex;
+    height: 100%;
+    width: 100%;
 }

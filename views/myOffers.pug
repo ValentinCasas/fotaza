@@ -1,12 +1,13 @@
 html
     head
+
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title= "Fotaza"
-        link(rel="shortcut icon" type="image/x-icon" href="logo3.png" sizes="573x573")
+        link(rel="shortcut icon" type="image/x-icon" href="/logo3.png" sizes="573x573")
 
         link(rel='stylesheet' href='/home.css')
         link(rel='stylesheet' href='/messages-section.css')
-        link(rel="stylesheet" href="/nav.css")
+        link(rel='stylesheet' href='/nav.css')
 
         link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
@@ -17,12 +18,12 @@ html
         script(nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js")
 
         script(src="/socket.io/socket.io.js")
-        script(content-type="JavaScript" src="/nav.js" defer)
+        script(src="/nav.js" defer)
 
     body
 
         header
-            div.container.align-items-centercol-lg-12.col-md-12.col-sm-12.col-xs-12
+            div.container.align-items-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 a#fotaza(href="/photo")
                     h1#fotaza Fotaza
                 nav
@@ -40,20 +41,40 @@ html
                     ion-icon#profile-icon(name="list")
                 div.overlay
 
-        div#contain-box-msg.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-4.mx-0.p-2
-            div#box-msg.col-lg-11.col-md-11.col-sm-12.col-xs-12.p-2
-                each message in messages
-                    .containerChat.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2    
-                        div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                            i#i-msg #{message.User.name} #{message.User.surname}
+        div.izquierda.col-lg-3.col-md-4.col-sm-4.col-xs-4 
+            div.col-lg-12.col-md-12.col-sm-12.col-xs-12.p-2
 
-                        div#img.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                            img(src=`/${message.Photo.image}`)
+                each user in usersEmiting
+                    .containerUsersEmitting.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2               
+                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#userEmitting
+                            img(src=`/${user.profileImage}`, class="rounded-circle").mx-2
+                            a(href=`/message/user/myOffers/${user.id}`)
+                                p #{`${user.name}` + ' ' + `${user.surname}`}
 
-                        div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                            h6#i-msg Contacto: #{message.User.email}
+        div#contain-box-msg(action="/comment/sendComment" method="post").col-lg-9.col-md-8.col-sm-8.col-xs-8.p-2  
+            div.col-lg-12.col-md-12.col-sm-12.col-xs-12#box-msg.p-2
 
-                        div#user-msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
-                            p#p-msg #{message.description}
+                if messages.length
+
+                    each message in messages
+                        .containerChat.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2         
+                            div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
+                                i#i-msg #{message.User.name} #{message.User.surname}
+
+                            div#img.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
+                                img(src=`/${message.Photo.image}`)
+
+                            div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
+                                h6#i-msg Contacto: #{message.User.email} 
+
+                            div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
+                                p#p-msg Mensaje: #{message.description}
+
+                else
+                    div.error.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2.justify-content-center.align-items-center
+                        div.error2.d-flex.flex-column.justify-content-center.align-items-center
+                            p No se selecciono ningun usuario
+
+
 
 

@@ -1,9 +1,9 @@
 html
     head
-        
+
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title= "Fotaza"
-        link(rel="shortcut icon" type="image/x-icon" href="logo3.png" sizes="573x573")
+        link(rel="shortcut icon" type="image/x-icon" href="/logo3.png" sizes="573x573")
 
         link(rel='stylesheet' href='/home.css')
         link(rel='stylesheet' href='/messages-section.css')
@@ -23,7 +23,7 @@ html
     body
 
         header
-            div.container.align-items-centercol-lg-12.col-md-12.col-sm-12.col-xs-12
+            div.container.align-items-center.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 a#fotaza(href="/photo")
                     h1#fotaza Fotaza
                 nav
@@ -41,17 +41,33 @@ html
                     ion-icon#profile-icon(name="list")
                 div.overlay
 
-        div.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-4.mx-0.p-2#contain-box-msg(action="/comment/sendComment" method="post")
-            div.col-lg-11.col-md-11.col-sm-12.col-xs-12.p-2#box-msg
-                each message in messages
-                    .containerChat.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2                
-                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
-                            i#i-msg #{message.User.name} #{message.User.surname}
+        div.izquierda.col-lg-3.col-md-4.col-sm-4.col-xs-4 
+            div.col-lg-12.col-md-12.col-sm-12.col-xs-12.p-2
 
-                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#img
-                            img(src=`/${message.description}`)
+                each user in usersEmiting
+                    .containerUsersEmitting.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2               
+                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#userEmitting
+                            img(src=`/${user.profileImage}`, class="rounded-circle").mx-2
+                            a(href=`/message/user/${user.id}`)
+                                p #{`${user.name}` + ' ' + `${user.surname}`}
 
-                        div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
-                            p#p-msg #{message.message}
+        div#contain-box-msg(action="/comment/sendComment" method="post").col-lg-9.col-md-8.col-sm-8.col-xs-8.p-2  
+            div.col-lg-12.col-md-12.col-sm-12.col-xs-12#box-msg.p-2
 
+                if messages.length
+                    each message in messages
+                        .containerChat.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2         
+                            div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
+                                i#i-msg #{message.User.name} #{message.User.surname}
+
+                            div#img.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
+                                img(src=`/${message.description}`)
+
+                            div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#user-msg
+                                p#p-msg Mensaje: #{message.message}
+
+                else 
+                    div.error.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2.justify-content-center.align-items-center
+                        div.error2.d-flex.flex-column.justify-content-center.align-items-center
+                            p No se selecciono ningun usuario
 

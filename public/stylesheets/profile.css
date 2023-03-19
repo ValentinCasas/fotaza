@@ -5,7 +5,10 @@
 
 
 body {
-    background-image: url(/910923.png);
+    background-color: #352157;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23352157' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23341f54' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23331d50' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23321b4d' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%2331194a' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23301747' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%232f1644' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%232e1441' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%232d123e' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%232b103b' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%232a0f38' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23290d35' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%23270b32' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%2326092f' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%2325072c' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%23230529' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%23220327' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 
@@ -35,7 +38,7 @@ body::-webkit-scrollbar-thumb,
     src: url(/fonts/P22MackinacPro-Bold_16.otf);
 }
 
-#contain-cards{
+#contain-cards {
     background-color: rgba(200, 207, 207, 0.363);
     border-radius: 10px;
 }
@@ -88,7 +91,7 @@ body::-webkit-scrollbar-thumb,
 #cerrar-comments {
     width: 20px;
     height: 20px;
-    color:black;
+    color: black;
     transition: 1s ease all;
 }
 
@@ -96,9 +99,6 @@ body::-webkit-scrollbar-thumb,
     color: black;
 }
 
-#details{
+#details {
     font-size: 40px;
 }
-
-
-

@@ -6,11 +6,10 @@
 
 body{
     /* background-image: url(/910923.png); */
-    background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='88' y1='88' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%233200a8'/%3E%3Cstop offset='1' stop-color='%235b17ca'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='75' y1='76' x2='168' y2='160'%3E%3Cstop offset='0' stop-color='%23868686'/%3E%3Cstop offset='0.09' stop-color='%23ababab'/%3E%3Cstop offset='0.18' stop-color='%23c4c4c4'/%3E%3Cstop offset='0.31' stop-color='%23d7d7d7'/%3E%3Cstop offset='0.44' stop-color='%23e5e5e5'/%3E%3Cstop offset='0.59' stop-color='%23f1f1f1'/%3E%3Cstop offset='0.75' stop-color='%23f9f9f9'/%3E%3Cstop offset='1' stop-color='%23FFFFFF'/%3E%3C/linearGradient%3E%3Cfilter id='c' x='0' y='0' width='200%25' height='200%25'%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='12' /%3E%3C/filter%3E%3C/defs%3E%3Cpolygon fill='url(%23a)' points='0 174 0 0 174 0'/%3E%3Cpath fill='%23000' fill-opacity='.5' filter='url(%23c)' d='M121.8 174C59.2 153.1 0 174 0 174s63.5-73.8 87-94c24.4-20.9 87-80 87-80S107.9 104.4 121.8 174z'/%3E%3Cpath fill='url(%23b)' d='M142.7 142.7C59.2 142.7 0 174 0 174s42-66.3 74.9-99.3S174 0 174 0S142.7 62.6 142.7 142.7z'/%3E%3C/svg%3E");
+    background-color: #352157;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23352157' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23341f54' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23331d50' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23321b4d' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%2331194a' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23301747' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%232f1644' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%232e1441' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%232d123e' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%232b103b' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%232a0f38' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23290d35' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%23270b32' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%2326092f' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%2325072c' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%23230529' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%23220327' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
     background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: top left;
+    background-size: cover;
     overflow-x:hidden;
 }
 
@@ -103,65 +102,6 @@ body::-webkit-scrollbar-thumb,
 }
 
 
-.drop-area{
-    border:5px dashed rgb(73, 173, 204);
-    height: 400px;
-    border-radius: 5px;
-}
-
-.drop-area.active{
-    border:2px dashed #00ff0d;
-    color:black;
-    background-color: #b8d4fe;
-}
-
-.drop-area h2{
-    font-size: 30px;
-    font-weight: 500;
-    color:rgb(73, 173, 204);
-}
-
-.drop-area span{
-    font-size: 25px;
-    color:rgb(73, 173, 204);
-}
-
-.drop-area button, #submitPhoto{
-    padding: 10px 25px;
-    font-size: 20px;
-    border:0;
-    outline: none;
-    background-color: #5256ad;
-    color:white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin:20px;
-}
-
-.file-container{
-    display:flex;
-    align-items: center;
-    gap:10px;
-    padding:10px;
-    border:solid 1px #ddd;
-}
-
-#preview{
-    margin-top:10px;
-    color:rgb(73, 173, 204);
-}
-
-.status-text{
-    padding:0 10px;
-}
-
-.success{
-    color:#52ad5a;
-}
-.failure{
-    color:#ff0000;
-}
-
 
 form{
     padding: 40px;
@@ -180,7 +120,6 @@ form{
     padding: 10px 0;
     font-size: 16px;
     color: #fff;
-    margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #fff;
     outline: none;
@@ -238,3 +177,93 @@ label{
     width: 100%;
     height: 100%;
 }
+
+
+
+
+
+
+
+
+
+.form {
+    background-color: #fff;
+    box-shadow: 0 10px 60px rgb(218, 229, 255);
+    border: 1px solid rgb(159, 159, 160);
+    border-radius: 20px;
+    padding: 2rem .7rem .7rem .7rem;
+    text-align: center;
+    font-size: 1.125rem;
+    max-width: 320px;
+  }
+  
+  .form-title {
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  
+  .form-paragraph {
+    margin-top: 10px;
+    font-size: 0.9375rem;
+    color: rgb(105, 105, 105);
+  }
+  
+  .drop-container {
+    background-color: #dbdbdb;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 2.1875rem;
+    border-radius: 10px;
+    border: 2px dashed rgb(171, 202, 255);
+    color: #444;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+  }
+  
+  .drop-container:hover {
+    background: rgba(0, 140, 255, 0.164);
+    border-color: rgba(17, 17, 17, 0.616);
+  }
+  
+  .drop-container:hover .drop-title {
+    color: #222;
+  }
+  
+  .drop-title {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+  }
+  
+  #image-input,#watermark-input {
+    width: 350px;
+    max-width: 100%;
+    color: #444;
+    padding: 2px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(8, 8, 8, 0.288);
+  }
+  
+  #image-input::file-selector-button,#watermark-input::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+  #image-input::file-selector-button:hover,#watermark-input::file-selector-button:hover {
+    background: #0d45a5;
+  }
