@@ -49,9 +49,9 @@ html
         div.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12     
             p intereses: #{users[0].interests}    
 
-        div#contain-cards.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-5.mx-0.p-4
+        div#contain-cards.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-5.mx-0.p-1
             each photo in photos 
-                div#card-img.row.justify-content-center.col-lg-3.col-md-10.col-sm-10.col-xs-10.my-2.mx-5 
+                div#card-img.row.justify-content-center.col-lg-3.col-md-10.col-sm-10.col-xs-10.my-2.mx-5
                     i.my-4 #{photo.category}    
                     img(src=`/${photo.image}`)
 

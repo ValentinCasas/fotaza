@@ -15,7 +15,9 @@
  }
 
  body {
-     background-image: url(/910923.png);
+     /* background-image: url(/910923.png); */
+     background:none;
+     background-color: #1b1d1f !important;
  }
 
  #contain-box-msg {
@@ -28,17 +30,20 @@
  .containerChat {
      border: .5px solid rgba(105, 98, 98, 0.459);
      border-radius: 2rem;
+     
  }
 
  #box-msg {
      height: 75vh;
      overflow-y: scroll;
      border: .5px solid rgba(107, 101, 101, 0.459);
-     background-color: #ffffff15;
+     background-color: rgba(88, 81, 81, 0.486);
+     border-radius: 10px;
  }
 
  #msg {
      word-wrap: break-word;
+     height: auto;
  }
 
  #i-msg {
@@ -76,4 +81,18 @@
      object-fit: contain;
      max-height: 300px;
      border-radius: 2rem;
+ }
+
+ #containDelete{
+    float: right;
+ }
+
+ #delete{
+    font-size: 20px;
+    color: rgb(153, 66, 66);
+ }
+
+ #delete:hover{
+    font-size: 20px;
+    color: rgb(236, 11, 11);
  }

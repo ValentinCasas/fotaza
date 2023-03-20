@@ -12,8 +12,6 @@ body {
 }
 
 
-
-
 body::-webkit-scrollbar,
 #box-cards::-webkit-scrollbar,
 #top-photos::-webkit-scrollbar {
@@ -33,14 +31,17 @@ body::-webkit-scrollbar-thumb,
 
 }
 
+i{
+    color: rgb(26, 25, 25);
+}
+
 @font-face {
     font-family: miFuente;
     src: url(/fonts/P22MackinacPro-Bold_16.otf);
 }
 
 #contain-cards {
-    background-color: rgba(200, 207, 207, 0.363);
-    border-radius: 10px;
+    background-color: rgba(200, 207, 207, 0.76);
 }
 
 * {
@@ -59,8 +60,9 @@ body::-webkit-scrollbar-thumb,
 }
 
 #card-img {
-    background-color: rgba(255, 255, 255, 0.356);
+    background-color: rgba(255, 255, 255, 0.144);
     border-radius: 10px;
+    border: .5px solid rgba(128, 127, 127, 0.692);
 }
 
 
@@ -68,6 +70,8 @@ body::-webkit-scrollbar-thumb,
     height: 300px;
     width: 100%;
     object-fit: contain;
+    border-radius: 5px;
+    border: .5px solid rgba(128, 127, 127, 0.158);
 }
 
 #abrirComments {

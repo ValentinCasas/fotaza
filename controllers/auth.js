@@ -8,7 +8,7 @@ exports.login = async function (req, res, next) {
 
     let { mail, password } = req.body;
     let = sessionId = req.sessionID;
-    
+
     await User.update({ sessionId: sessionId }, { where: { email: mail } });
 
     const user = await User.findAll({ where: { email: mail } });
@@ -72,4 +72,9 @@ exports.register = async function (req, res) {
 /* post '/view/register' */
 exports.viewRegister = function (req, res) {
     res.redirect("/register");
-}; 
+};
+
+/* /error */
+exports.error = function (req, res) {
+    res.redirect("/");
+}

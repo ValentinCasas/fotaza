@@ -54,6 +54,10 @@ html
                         i= comment.shippingDate
                     div#msg.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2
                         p#p-msg= comment.description
+                    if req.sessionID == comment.User.sessionId
+                        div#containDelete
+                            a(href=`/comment/delete/${comment.id}/${idPhoto}`) 
+                                ion-icon#delete(name="trash")   
                     div.col-lg-12.col-md-12.col-sm-12.col-xs-12#linea-msg
 
             div#add-msg.col-lg-8.col-md-8.col-sm-8.col-xs-8.p-0

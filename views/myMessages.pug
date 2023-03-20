@@ -47,9 +47,9 @@ html
                 each user in usersEmiting
                     .containerUsersEmitting.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2               
                         div.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2#userEmitting
-                            img(src=`/${user.profileImage}`, class="rounded-circle").mx-2
-                            a(href=`/message/user/${user.id}`)
-                                p #{`${user.name}` + ' ' + `${user.surname}`}
+                            img(src=`/${user.profileImage}` title=`${user.name}` + ' ' + `${user.surname}` class="rounded-circle").mx-2
+                            a(href=`/message/user/${user.id}` title=`${user.name}` + ' ' + `${user.surname}`)
+                                p.name #{`${user.name}` + ' ' + `${user.surname}`}
 
         div#contain-box-msg(action="/comment/sendComment" method="post").col-lg-9.col-md-8.col-sm-8.col-xs-8.p-2  
             div.col-lg-12.col-md-12.col-sm-12.col-xs-12#box-msg.p-2

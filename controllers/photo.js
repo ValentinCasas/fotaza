@@ -125,7 +125,6 @@ exports.deletePhoto = async function (req, res, next) {
     res.redirect("/user/profile");
 }
 
-
 /* get / */
 exports.cargarDatos = async function (req, res, next) {
 
@@ -199,7 +198,6 @@ exports.cargarDatos = async function (req, res, next) {
 
     res.render("home", { photos: randomPhotos.reverse(), labels: labels, users: users, req: req, photosRating: destacadas })
 }
-
 
 /* get /sort/:manera */
 exports.sortPhoto = async function (req, res, next) {
@@ -328,7 +326,7 @@ exports.submitPhoto = async function (req, res) {
         console.log("Hubo un error al cargar la imagen :/");
     }
 
-    res.redirect("/photo");
+    res.redirect("/almacenar");
 };
 
 /* get /rating/:id/:numStar */
