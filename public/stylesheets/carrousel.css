@@ -7,7 +7,7 @@
     background-color: #5256ade3;
 }
 
-.splide__slide img {
+#image-carousel > .splide__track > .splide__list > .splide__slide img {
     object-fit: cover;
     border-radius: 50%;
     width: 100px;
@@ -15,8 +15,46 @@
     transition: all .5s ease;
 }
 
-.splide__slide img:hover {
+#image-carousel > .splide__track > .splide__list > .splide__slide img:hover {
     border-radius: 5px;
     width: 100px;
     height: 100px;
+}
+
+
+/* doble */
+
+#contain-main-slider{
+    height: 100vh;
+    background-color: rgba(24, 23, 23, 0.925);
+}
+
+.splide {
+    margin: 0 auto;
+}
+
+.thumbnails {
+    display: flex;
+    margin: 1rem auto 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.thumbnail {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0 0.2rem;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.thumbnail.is-active {
+    opacity: 1;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: auto;
 }

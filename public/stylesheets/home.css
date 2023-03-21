@@ -11,13 +11,14 @@ body {
     background-position: top left;
     overflow-x: hidden;
     width: 100vw;
+    height: auto;
 }
 
 .animated {
     opacity: 0;
     transform: translateY(100%);
     transition: all .5s ease;
-  }
+}
 
 #fotaza {
     --gradien-right: #B54FF3;
@@ -44,11 +45,11 @@ body::-webkit-scrollbar,
 #box-cards:hover::-webkit-scrollbar,
 #top-photos:hover::-webkit-scrollbar,
 #box-msg:hover::-webkit-scrollbar,
-.izquierda:hover::-webkit-scrollbar{
+.izquierda:hover::-webkit-scrollbar {
     display: block;
 }
 
-#top-photos::-webkit-scrollbar{
+#top-photos::-webkit-scrollbar {
     height: 6px;
 }
 
@@ -309,7 +310,7 @@ p {
     transform: translateX(0%);
 }
 
-#msg{
+#msg {
     height: 100px;
 }
 
@@ -691,93 +692,9 @@ p {
     color: rgb(146, 140, 140);
 }
 
-
-
-
-
-.slider {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.74);
-}
-
-.slider-images {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.slider-images img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.slider-prev,
-.slider-next {
-    border-radius: 2rem;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    display: block;
-    border: none;
-}
-
-.slider-prev ion-icon,
-.slider-next ion-icon {
-    font-size: 40px;
-}
-
-.slider-prev {
-    left: 0;
-}
-
-.slider-next {
-    right: 0;
-}
-
-.slider-indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-}
-
-.slider-indicators .dot {
-    width: 10px;
-    height: 10px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-}
-
-.slider-indicators .dot.active {
-    background-color: white;
-}
-
-
 #search-outline {
     font-size: 20px;
 }
-
-
-
-
-
 
 #buscar {
     border: .1px solid black;
@@ -900,7 +817,7 @@ input:not(:placeholder-shown)~.reset {
 
 
 
-.contain-menu-overlay  {
+.contain-menu-overlay {
     position: fixed;
     inset: 0;
     z-index: 2;
@@ -931,3 +848,5 @@ input:not(:placeholder-shown)~.reset {
 .error>p {
     color: whitesmoke;
 }
+
+
