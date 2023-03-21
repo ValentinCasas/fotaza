@@ -1,0 +1,22 @@
+/* top fotos */
+#image-carousel {
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    background-color: #5256ade3;
+}
+
+.splide__slide img {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    transition: all .5s ease;
+}
+
+.splide__slide img:hover {
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+}
