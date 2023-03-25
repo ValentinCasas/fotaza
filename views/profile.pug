@@ -51,13 +51,14 @@ html
 
         div#contain-cards.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-5.mx-0.p-1
             each photo in photos 
-                div#card-img.row.justify-content-center.col-lg-3.col-md-10.col-sm-10.col-xs-10.my-2.mx-5
-                    i.my-4 #{photo.category}    
+                div#card-img.row.justify-content-center.col-lg-3.col-md-5.col-sm-10.col-xs-10.my-2.mx-5
                     img(src=`/${photo.image}`)
 
-                    i=photo.creationDate 
+                    p.my-4 #{photo.category}    
+                    i.mx-4.my-4 ~
+                    i.my-4=photo.creationDate 
 
-                    div#delete-photo.col-lg-10.col-md-10.col-sm-10.col-xs-10  
+                    div#delete-photo.col-lg-10.col-md-10.col-sm-10.col-xs-10.my-4  
                         a#abrirComments(href=`/comment/view/${photo.id}`)  comentarios
 
                     div#delete-photo.col-lg-10.col-md-10.col-sm-10.col-xs-10  
