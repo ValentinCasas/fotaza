@@ -5,7 +5,7 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title= "Fotaza"
         link(rel="shortcut icon" type="image/x-icon" href="/logo3.png" sizes="573x573")
-        
+
         link(rel="stylesheet" href="/profile.css")
         link(rel="stylesheet" href="/nav.css")
 
@@ -40,14 +40,15 @@ html
                 div.overlay
 
 
-        div#img-profile.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-2.p-4
-            img(src=`/${users[0].profileImage}`)
+        div#contain-datos.col-lg-12.col-md-12.col-sm-12.col-xs-12.p-4
+            div#img-profile.d-flex.justify-content-center.col-lg-2.col-md-2.col-sm-4.col-xs-4.mx-4
+                img(src=`/${users[0].profileImage}`)
 
-        div.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12     
-            p= `${users[0].name} ${users[0].surname}`
+            div   
+                p= `${users[0].name} ${users[0].surname}`
 
-        div.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12     
-            p intereses: #{users[0].interests}    
+            div 
+                p intereses: #{users[0].interests}    
 
         div#contain-cards.row.justify-content-center.col-lg-12.col-md-12.col-sm-12.col-xs-12.my-5.mx-0.p-1
             each photo in photos 
@@ -56,9 +57,9 @@ html
 
                     p.my-4 #{photo.category}    
                     i.mx-4.my-4 ~
-                    i.my-4=photo.creationDate 
+                    p.my-4=photo.creationDate 
 
-                    div#delete-photo.col-lg-10.col-md-10.col-sm-10.col-xs-10.my-4  
+                    div#delete-photo.col-lg-10.col-md-10.col-sm-10.col-xs-10  
                         a#abrirComments(href=`/comment/view/${photo.id}`)  comentarios
 
                     div#delete-photo.col-lg-10.col-md-10.col-sm-10.col-xs-10  
