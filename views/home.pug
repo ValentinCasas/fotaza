@@ -54,7 +54,13 @@ html(lang="es")
                     each photo in photosRating
                         li.splide__slide
                             a#top-target(href=`/photo/target-top/${photo.id}`)
-                                img(src=`/${photo.image}` title=`${photo.category}`)
+
+                                if photo.privacy == "private" && req.session.isLoggedIn
+                                    img(src=`/${photo.imageWatermark}` title=`${photo.category}`)
+                                else if photo.privacy == "public" && !req.session.isLoggedIn
+                                    img(src=`/${photo.imageWatermarkFotaza}` title=`${photo.category}`)
+                                else if photo.privacy != "private" && req.session.isLoggedIn
+                                    img(src=`/${photo.image}` title=`${photo.category}`)
 
         //menu para ordenar imagenes
         #contain-menu
@@ -222,25 +228,32 @@ html(lang="es")
                 div#card.col-lg-3.col-md-11.col-sm-11.col-xs-4.m-5
 
         //cambiar a fotos menos pesadas para que cargue mas rapido
-        div#contain-main-slider.col-lg-12.col-md-12.col-sm-12.col-xs-12.py-5
-            section#main-slider.splide(aria-label="My Awesome Gallery")
-                div.splide__track
-                    ul.splide__list
-                        li.splide__slide
-                            img(src=`${photos[0].image}` alt="")
-                        li.splide__slide    
-                            img(src=`${photos[1].image}` alt="")
-                        li.splide__slide    
-                            img(src=`${photos[2].image}` alt="")
+        if photos.length > 0
+            div#contain-main-slider.col-lg-12.col-md-12.col-sm-12.col-xs-12.py-5
+                section#main-slider.splide(aria-label="My Awesome Gallery")
+                    div.splide__track
+                        ul.splide__list
+                            each photo in photos 
+                                li.splide__slide
+                                    if photo.privacy == "private"
+                                        img(src=`/${photo.imageWatermark}` title=`${photo.category}`)
+                                    else if photo.privacy == "public" && !req.session.isLoggedIn
+                                        img(src=`/${photo.imageWatermarkFotaza}` title=`${photo.category}`)
+                                    else if photo.privacy != "private" && req.session.isLoggedIn
+                                        img(src=`/${photo.image}` title=`${photo.category}`)   
 
 
-            ul#thumbnails.thumbnails
-                li.thumbnail           
-                    img(src=`${photos[0].image}` alt="")
-                li.thumbnail   
-                    img(src=`${photos[1].image}` alt="")
-                li.thumbnail    
-                    img(src=`${photos[2].image}` alt="")
+
+                ul#thumbnails.thumbnails
+                    each photo in photos 
+                        li.thumbnail           
+                            if photo.privacy == "private"
+                                img(src=`/${photo.imageWatermark}` title=`${photo.category}`)
+                            else if photo.privacy == "public" && !req.session.isLoggedIn
+                                img(src=`/${photo.imageWatermarkFotaza}` title=`${photo.category}`)
+                            else if photo.privacy != "private" && req.session.isLoggedIn
+                                img(src=`/${photo.image}` title=`${photo.category}`)   
+
 
 
 

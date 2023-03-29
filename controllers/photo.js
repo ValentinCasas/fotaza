@@ -246,7 +246,7 @@ exports.viewTarget = async function (req, res) {
     const id = req.params.id;
     const photos = await Photo.findAll({ where: { id: id } })
 
-    res.render("target-view-top", { photos: photos })
+    res.render("target-view-top", { photos: photos, req: req })
 };
 
 /* get '/view/almacenar' */

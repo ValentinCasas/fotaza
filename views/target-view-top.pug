@@ -42,7 +42,12 @@ html(lang="es")
 
         #top-target-box.row
             #top-target-img.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                img(src=`/${photos[0].image}`)
+                if photos[0].privacy == "private"
+                    img(src=`/${photos[0].imageWatermark}` title=`${photos[0].category}`)
+                else if photos[0].privacy == "public" && !req.session.isLoggedIn
+                    img(src=`/${photos[0].imageWatermarkFotaza}` title=`${photos[0].category}`)
+                else if photos[0].privacy != "private" && req.session.isLoggedIn
+                    img(src=`/${photos[0].image}` title=`${photos[0].category}`)
 
 
 
