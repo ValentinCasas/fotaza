@@ -2,6 +2,21 @@ extends layout
 
 block content
 
+    div.modal
+        div.modal-content
+            p  ~  Los usuarios deben crear y mantener una cuenta en la aplicación para poder publicar y acceder a las fotografías privadas.
+            p  ~  Los usuarios deben ser respetuosos con otros usuarios en la comunidad y no publicar contenido ofensivo, discriminatorio, amenazante o ilegal.
+            p  ~  Los usuarios deben respetar los derechos de autor y propiedad intelectual de las fotografías publicadas, y solo publicar imágenes de las que tengan los derechos necesarios.
+            p  ~  Los usuarios deben etiquetar sus fotografías de manera precisa y coherente para facilitar la búsqueda y organización de las imágenes.
+            p  ~  Los usuarios no pueden usar la aplicación para actividades comerciales no autorizadas, como la venta de fotografías sin permiso del autor.
+            p  ~  Los usuarios deben informar de inmediato cualquier comportamiento inapropiado o contenido ofensivo que encuentren en la aplicación a los administradores del sitio.
+            p  ~  Los usuarios deben respetar los derechos de privacidad de los demás usuarios y no publicar información personal de terceros sin su consentimiento.
+            p  ~  Los usuarios no pueden utilizar la aplicación para realizar actividades ilegales o que violen las leyes o normas aplicables.
+            p  ~  Los usuarios deben utilizar la aplicación de manera responsable y no sobrecargar el sitio con un uso excesivo de recursos o spam.
+            p  ~  Los usuarios deben seguir las instrucciones y requisitos establecidos en la aplicación en cuanto a la publicación de fotografías y el uso de la aplicación en general
+            button.modal-close Cerrar
+
+
     div.m-1.row
 
         div.col-lg-7.col-md-6.col-sm-5.col-xs-12.my-5.animated
@@ -38,6 +53,13 @@ block content
                     div.user-box
                         input(type="file" name="imagen" accept="image/jpeg,image/jpg,image/png")
                         label Photo profile
+                    div#politica
+                        label Condiciones de uso 
+                    div.user-box.d-flex
+                        input(type="checkbox" name="politica" required id="checkbox")
+
                     button#submit-login(type="submit") Submit
+
+
 
 

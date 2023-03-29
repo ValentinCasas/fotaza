@@ -58,7 +58,6 @@ body::-webkit-scrollbar-thumb,
 
 /* -------------------------------------- LOGIN -------------------------------------------- */
 
-
 .login-box {
     /* width: 100%; */
     padding: 40px;
@@ -101,6 +100,16 @@ body::-webkit-scrollbar-thumb,
     pointer-events: none;
     transition: .5s;
 }
+
+.login-box #politica label {
+
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
 
 .login-box .user-box input:focus~label,
 .login-box .user-box input:valid~label {
@@ -205,4 +214,49 @@ body::-webkit-scrollbar-thumb,
 
 .cssbuttons-io-button:active .icon {
     transform: scale(0.95);
+}
+
+/* modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: #999cd6;
+    z-index: 999;
+}
+
+.modal .modal-content {
+    background-color: #999cd6;
+}
+
+.modal-content {
+    background-color: #999cd6;
+    margin: auto;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 5px;
+    padding: 4px;
+    margin: 4px;
+    transition: all .5s ease;
+}
+
+.modal-close:hover {
+background-color: #2b2a2a;
+color: rgb(153, 151, 151);
+}
+
+#checkbox{
+    width: 40px;
 }
