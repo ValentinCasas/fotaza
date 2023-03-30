@@ -35,7 +35,8 @@ body::-webkit-scrollbar,
 #contain-menu::-webkit-scrollbar,
 #box-msg::-webkit-scrollbar,
 #carde::-webkit-scrollbar,
-.izquierda::-webkit-scrollbar {
+.izquierda::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar {
     display: none;
     width: 3px;
     display: none;
@@ -45,11 +46,14 @@ body::-webkit-scrollbar,
 #box-cards:hover::-webkit-scrollbar,
 #top-photos:hover::-webkit-scrollbar,
 #box-msg:hover::-webkit-scrollbar,
-.izquierda:hover::-webkit-scrollbar {
+.izquierda:hover::-webkit-scrollbar,
+.modal-content:hover::-webkit-scrollbar {
     display: block;
+
 }
 
-#top-photos::-webkit-scrollbar {
+#top-photos::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar {
     height: 6px;
 }
 
@@ -70,7 +74,8 @@ body::-webkit-scrollbar-thumb,
 #contain-menu::-webkit-scrollbar-thumb,
 #box-msg::-webkit-scrollbar-thumb,
 #carde::-webkit-scrollbar-thumb,
-.izquierda::-webkit-scrollbar-thumb {
+.izquierda::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb {
     background: linear-gradient(121deg, rgb(0, 0, 0) 37%, rgba(73, 27, 164, 1) 74%, rgba(112, 21, 247, 1) 88%);
 
 }
@@ -848,5 +853,3 @@ input:not(:placeholder-shown)~.reset {
 .error>p {
     color: whitesmoke;
 }
-
-

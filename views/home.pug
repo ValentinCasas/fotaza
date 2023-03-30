@@ -55,7 +55,7 @@ html(lang="es")
                         li.splide__slide
                             a#top-target(href=`/photo/target-top/${photo.id}`)
 
-                                if photo.privacy == "private" && req.session.isLoggedIn
+                                if photo.privacy == "private" && req.session.isLoggedIn || photo.rightOfUse == "Copyleft" && req.session.isLoggedIn
                                     img(src=`/${photo.imageWatermark}` title=`${photo.category}`)
                                 else if photo.privacy == "public" && !req.session.isLoggedIn
                                     img(src=`/${photo.imageWatermarkFotaza}` title=`${photo.category}`)
@@ -158,12 +158,15 @@ html(lang="es")
                             div.row.justify-content-center.my-2.mx-0.col-lg-12.col-md-12.col-sm-12.col-xs-12.p-0
                                 div#photo-card
                                     // Mostrar la imagen de la foto dependiendo de su privacidad y si el usuario ha iniciado sesión
-                                    if photo.privacy == "private"
+                                    if photo.privacy == "private" || photo.rightOfUse == "Copyleft"
                                         img(src=`/${photo.imageWatermark}` title=`${photo.category}`)
+
                                     else if photo.privacy == "public" && !req.session.isLoggedIn
                                         img(src=`/${photo.imageWatermarkFotaza}` title=`${photo.category}`)
+
                                     else if photo.privacy != "private" && req.session.isLoggedIn
                                         img(src=`/${photo.image}` title=`${photo.category}`)
+
 
                             // Categoría de la foto
                             div#name-card.col-lg-8.col-md-8.col-sm-8.col-xs-12
@@ -235,7 +238,7 @@ html(lang="es")
                         ul.splide__list
                             each photo in photos 
                                 li.splide__slide
-                                    if photo.privacy == "private"
+                                    if photo.privacy == "private" || photo.rightOfUse == "Copyleft"
                                         img(src=`/${photo.imageWatermark}` title=`${photo.category}`)
                                     else if photo.privacy == "public" && !req.session.isLoggedIn
                                         img(src=`/${photo.imageWatermarkFotaza}` title=`${photo.category}`)
@@ -247,7 +250,7 @@ html(lang="es")
                 ul#thumbnails.thumbnails
                     each photo in photos 
                         li.thumbnail           
-                            if photo.privacy == "private"
+                            if photo.privacy == "private" || photo.rightOfUse == "Copyleft"
                                 img(src=`/${photo.imageWatermark}` title=`${photo.category}`)
                             else if photo.privacy == "public" && !req.session.isLoggedIn
                                 img(src=`/${photo.imageWatermarkFotaza}` title=`${photo.category}`)

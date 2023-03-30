@@ -84,6 +84,7 @@ html
                 //derechos de uso
                 label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 Derechos de uso
                 select#rightOfUse.col-lg-11.col-md-11.col-sm-11.col-xs-11.form-control.p-2(name="rightOfUse")
+                    option(value="null") Sin derecho de uso
                     option(value="Copyleft") Copyleft
                     option(value="Copyright") Copyright
 
@@ -101,12 +102,13 @@ html
                 //etiquetas
                 div.data-photo-box.my-5
                     input(type="text" name="label1" required="")
-                    label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 etiqueta 1
+                    label etiqueta 1
                 div.data-photo-box.my-5.mx-2
                     input(type="text" name="label2" required)
-                    label.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-1.p-2 etiqueta 2
+                    label etiqueta 2
                 div.data-photo-box.my-5
                     input(type="text" name="label3" required)
-                    label.col-lg-11.col-md-11.col-sm-11.col-xs-11.p-2 etiqueta 3
+                    label etiqueta 3
+                    
                 button#submitPhoto.col-lg-11.col-md-11.col-sm-11.col-xs-11.m-4.p-4(type="submit") Subir
 

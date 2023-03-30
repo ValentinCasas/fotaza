@@ -39,7 +39,7 @@ exports.register = async function (req, res) {
     let rutaImagen = "";
 
     if (req.files === null) {
-        rutaImagen = "images/noAutenticated.jpg";
+        rutaImagen = "imagesImportant/noAutenticated.png";
     } else {
         const { imagen } = req.files;
 

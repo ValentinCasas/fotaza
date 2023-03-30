@@ -233,6 +233,8 @@ body::-webkit-scrollbar-thumb,
 
 .modal .modal-content {
     background-color: #999cd6;
+    height: 95vh;
+    overflow-y: scroll;
 }
 
 .modal-content {
@@ -244,6 +246,7 @@ body::-webkit-scrollbar-thumb,
 
 .modal-close {
     position: absolute;
+    background-color: #b3b3b348;
     top: 10px;
     right: 10px;
     height: 50px;

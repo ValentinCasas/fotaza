@@ -205,9 +205,40 @@ exports.sortPhoto = async function (req, res, next) {
     const users = await User.findAll();
     const labels = await Label.findAll({ include: Photo });
 
-    const photosRating = photos.filter(photo => {
-        return photo.numberOfStars > 4;
-    });
+     /* zona donde consigo photosRating */
+     let array = new Set();
+     let photoratings = await Photorating.findAll({ include: Photo });
+ 
+     photos.forEach((photo) => {
+         let counter = 0; // contador de valoraciones dentro de la primer semana
+         // Iterar por cada Photorating correspondiente a esta Photo
+         photoratings.forEach((photorating) => {
+             if (photorating.idPhoto === photo.id) {
+ 
+                 // Obtener la fecha de creación de la Photo correspondiente a este Photorating
+                 const photoCreationDate = new Date(photo.creationDate);
+                 const photoratingCreationDate = new Date(photorating.creationDate);
+                 const differenceInTime = photoratingCreationDate.getTime() - photoCreationDate.getTime();
+                 const differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
+                 // Si la diferencia de días es menor o igual a 7, sumar al contador de valoraciones dentro de la primer semana
+                 if (differenceInDays <= 7) {
+                     counter++;
+                 }
+             }
+         });
+         // Si la Photo tiene al menos 3 valoraciones dentro de la primer semana y tiene un numberOfStars mayor a 4, agregarla al array
+         if (counter >= 3 && photo.numberOfStars > 4) {
+             array.add(photo.id);
+         }
+     });
+ 
+     // Obtener todas las Photos que tienen un id en el array
+     let destacadas = await Photo.findAll({
+         where: {
+             id: Array.from(array), // Convertir el set a un array
+         },
+     });
+ 
 
     let manera = req.params.manera;
 
@@ -237,7 +268,7 @@ exports.sortPhoto = async function (req, res, next) {
             break;
     }
 
-    res.render("home", { photos: photos, labels: labels, users: users, req: req, photosRating: photosRating })
+    res.render("home", { photos: photos, labels: labels, users: users, req: req, photosRating: destacadas })
 }
 
 /* get '/target-top/:id' */
@@ -284,6 +315,31 @@ exports.submitPhoto = async function (req, res) {
         image1.write('./public/imagesWatermark/' + rutaImagenWatermark);
     }
 
+    if (rightOfUse == "Copyleft") {
+        const image = await Jimp.read(imagen.data);
+        const imageWidth = image.bitmap.width;
+        const imageHeight = image.bitmap.height;
+
+        const copyleftImage = await Jimp.read('public/imagesImportant/copyleft.png');
+        copyleftImage.resize(imageWidth / 10, Jimp.AUTO);
+
+        const font = await Jimp.loadFont(Jimp.FONT_SANS_16_BLACK);
+        const text = "Copyleft (c) " + new Date().getFullYear() + users[0].name;
+
+        // Ajustar la posición de la imagen copyleft y el texto
+        const copyleftX = imageWidth - copyleftImage.bitmap.width - 5;
+        const copyleftY = 5;
+        const textX = 5;
+        const textY = imageHeight - Jimp.measureTextHeight(font, text) - copyleftImage.bitmap.height - 10;
+
+        image.composite(copyleftImage, copyleftX, copyleftY);
+        image.print(font, textX, textY, text, imageWidth, imageHeight);
+
+        rutaImagenWatermark = uuid.v1() + imagen.name;
+        await image.writeAsync('./public/imagesWatermark/' + rutaImagenWatermark);
+    }
+
+
     if (privacy == "public" && rightOfUse != "Copyright") {
         const image3 = await Jimp.read(imagen.data);
         const image4 = await Jimp.read('public/imagesImportant/template.png');
@@ -291,14 +347,12 @@ exports.submitPhoto = async function (req, res) {
         const altoImagen3 = image3.bitmap.height;
         image4.resize(anchoImagen3 * 2, altoImagen3 * 2);
         image3.blit(image4, -20, -20)
-
-        rutaImagenWatermarkFotaza = uuid.v1() + imagen.name;
-        image3.write('./public/imagesWatermarkFotaza/' + rutaImagenWatermarkFotaza);
     }
+
 
     const tiempoTranscurrido = Date.now();
     const fechaCreacion = new Date(tiempoTranscurrido);
-    fechaCreacion.toLocaleDateString()
+    fechaCreacion.toLocaleDateString();
 
     try {
         const result = await Photo.create({
@@ -364,4 +418,5 @@ exports.ratingPhoto = async function (req, res) {
     res.redirect("/photo");
 
 }
+
 
