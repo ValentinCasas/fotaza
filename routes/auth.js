@@ -15,7 +15,7 @@ router.get('/login', function (req, res, next) {
 
 var isAutenticatedBD = (req, res, next) => {
   if (req.session.isLoggedIn) return next();
-  res.redirect("/");
+  res.redirect("/?error=debe estar logueado para acceder a esta funcionalidad");
 }
 
 module.exports.isAutenticatedBD = isAutenticatedBD;

@@ -34,7 +34,6 @@ exports.cerrarSesion = function (req, res, next) {
 
 /* post '/register' */
 exports.register = async function (req, res) {
-
     const { name, surname, mail, interests } = req.body;
     let rutaImagen = "";
 
@@ -47,7 +46,6 @@ exports.register = async function (req, res) {
         console.log(rutaImagen);
         imagen.mv("./public/profile-images/" + rutaImagen);
     }
-
 
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
@@ -62,12 +60,15 @@ exports.register = async function (req, res) {
                     password: password,
                     interests: interests ? interests : "null",
                     profileImage: rutaImagen,
-                })
+                }).then(() => {
+                    res.render("register");
+                });
+            } else {
+                res.redirect('/register?error=ya se encuentra un usuario con esas credenciales');
             }
-            res.redirect("/");
-        })
-
+        });
 };
+
 
 /* post '/view/register' */
 exports.viewRegister = function (req, res) {
@@ -76,5 +77,5 @@ exports.viewRegister = function (req, res) {
 
 /* /error */
 exports.error = function (req, res) {
-    res.redirect("/");
+    res.redirect('/?error=hubo un error');
 }

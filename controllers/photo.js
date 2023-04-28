@@ -290,6 +290,7 @@ exports.viewAlmacenarPhoto = function (req, res) {
 exports.submitPhoto = async function (req, res) {
 
     const { imagen, watermark } = req.files;
+
     let { title, privacy, category, label1, label2, label3, rightOfUse } = req.body;
     let rutaImagenWatermark = '';
     let rutaImagenWatermarkFotaza = '';
@@ -377,7 +378,7 @@ exports.submitPhoto = async function (req, res) {
             });
         }
     } catch (err) {
-        console.log("Hubo un error al cargar la imagen :/");
+        res.redirect("/almacenar?error=hubo un error al cargar la imagen, verifique que los archivos sean correctos y que los campos esten completos");
     }
 
     res.redirect("/almacenar");

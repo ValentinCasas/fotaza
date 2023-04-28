@@ -9,3 +9,6 @@ details.addEventListener('click', () => {
 closeButton.addEventListener('click', () => {
   modal.style.display = 'none'; // cierra el modal estableciendo el estilo "display" a "none"
 });
+
+
+
