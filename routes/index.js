@@ -4,11 +4,14 @@ const { Comment, Label, Photo, Photorating, User } = require("../models");
 
 
 router.get('/', async function (req, res, next) {
-  res.render("login");
+  const { error } = req.query;
+  res.render("login", { error });
 });
 
 router.get('/register', async function (req, res, next) {
-  res.render("register");
+  const { error } = req.query;
+  res.render("register", { error });
 });
+
  
 module.exports = router;
