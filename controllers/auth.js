@@ -61,7 +61,7 @@ exports.register = async function (req, res) {
                     interests: interests ? interests : "null",
                     profileImage: rutaImagen,
                 }).then(() => {
-                    res.render("register");
+                    res.redirect("/");
                 });
             } else {
                 res.redirect('/register?error=ya se encuentra un usuario con esas credenciales');
